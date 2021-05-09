@@ -73,26 +73,30 @@ exports.cerrarSesion = async(page, nombreUsuario) => {
 
 exports.tomarCaptura = async(page, esc) => {
     numeroCaptura += 1
+    await this.esperar(1000)
     page = page[0]
     await page.screenshot({ path: `./${esc}/${esc}-${numeroCaptura}.png` })
 }
 
 exports.clickNuevoPost = async(page) => {
     page = page[0];
-    await this.esperar(1000)
     const button = await page.waitForSelector('a[href="#/editor/post/"]');
+    await button.click();
+
+}
+exports.clickNuevoPage = async(page) => {
+    page = page[0];
+    const button = await page.waitForSelector('a[href="#/editor/page/"]');
     await button.click();
 
 }
 exports.escribirMockEnPost = async(page, title, texto) => {
     page = page[0]
-    await this.esperar(1000)
     const inputTitle = await page.waitForSelector('.gh-editor-title')
     const inputText = await page.waitForSelector('p[data-koenig-dnd-droppable="true"]')
     await inputTitle.click()
     await inputTitle.fill(title)
     await inputText.fill(texto);
-    await this.esperar(2000)
 }
 
 exports.publicarPost = async(page) => {
@@ -109,4 +113,26 @@ exports.verificarPostPublicado = async(page, tituloPost) => {
     const divPost = await postTitle.$('xpath=../..')
     const badgeStatus = await divPost.$('span.gh-content-status-published')
     expect(await badgeStatus.innerText()).toBe('PUBLISHED')
+}
+
+exports.eliminarPost = async(page, tituloPost) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost}")`)
+    const divPost = await postTitle.$('xpath=../..')
+    await divPost.click()
+    const settingButton = await page.waitForSelector('button[title="Settings"]');
+    await settingButton.click()
+    const delButton = await page.waitForSelector('.settings-menu-delete-button')
+    await delButton.click()
+    await page.waitForSelector('section.modal-content')
+    const modal = await page.$('section.modal-content')
+    const confirmDelButt = await modal.$('.gh-btn-red')
+    await confirmDelButt.click()
+}
+
+exports.verificarPostEliminado = async(page, tituloPost) => {
+    page = page[0];
+    const list = await page.waitForSelector('section.content-list')
+    const postTitle = list.$(`.gh-content-entry-title:text("${tituloPost}")`)
+    expect(await postTitle).toBe(null);
 }

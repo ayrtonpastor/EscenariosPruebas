@@ -1,5 +1,5 @@
 const po = require('./page-objects')
-exports.escenario5 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost) => {
+exports.escenario9 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost) => {
 
 
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
@@ -31,7 +31,7 @@ exports.escenario5 = async(url, browser, scenarioTag, correctEmail, correctPass,
     await po.tomarCaptura(page, scenarioTag)
 
     //da click en el boton de crear nuevo post
-    await po.clickNuevoPost(page)
+    await po.clickNuevoPage(page)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
