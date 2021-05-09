@@ -29,7 +29,25 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//*[@class='settings-menu-container']//button[contains(@class,'settings-menu-delete-button')]").click()
     sleep 1
     @driver.find_element(:xpath, "(//*[@class='modal-footer']//button)[2]").click()
+  end
 
+  Then(/^I "([^"]*)" current "([^"]*)"$/) do |action, type_element|
+    if action != "Publish" and action !="Update"
+      raise "Accion no soportada unicamente Publish y Update"
+    end
+
+    if type_element != "Post" and type_element != "Page"
+      raise "Elemento no soportado, debe ser Page o Post"
+    end
+
+    if action == "Publish"
+      @driver.action.send_keys("\n").perform
+    end
+
+    sleep 2
+    @driver.find_element(:xpath, "//div/span[text()='#{action}']").click()
+    sleep 2
+    @driver.find_element(:xpath, "//button[contains(@class,'gh-publishmenu-button')]//span[text()='#{action}']").click()
   end
 
   Then(/^I navigate to menu "([^"]*)"$/) do |menu_item|
@@ -43,6 +61,19 @@ if ENV["ADB_DEVICE_ARG"].nil?
 
   Then(/^I create new "([^"]*)"$/) do |type_element|
     @driver.find_element(:xpath, "//*[@href='#/editor/#{type_element}']").click()
+  end
+
+  Then(/^I change post owner from "([^"]*)" to "([^"]*)"$/) do |old_owner, new_owner|
+    @driver.find_element(:xpath, "//button[@class='post-settings']").click()
+    sleep 1
+    @driver.find_element(:xpath, "//div[label[text()='Authors']]//div[@role='button']").click()
+    sleep 1
+    @driver.find_element(:xpath, "//ul[@role='listbox']//li[@role='option' and text()='#{new_owner}']").click()
+    sleep 2
+    @driver.find_element(:xpath, "//*[@class='settings-menu-container']//li[text()='#{old_owner}']//span").click()
+    sleep 1
+    @driver.find_element(:xpath, "//button[@class='close settings-menu-header-action']").click()
+    sleep 1
   end
 
 
