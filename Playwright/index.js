@@ -40,7 +40,7 @@ const url = 'http://localhost:2369/ghost/';
     await e5.escenario5(
         url,
         'chromium',
-        'e1',
+        'e5',
         'b@uniandes.edu.co',
         '$0987654321.',
         'Juan Carlos',
