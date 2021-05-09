@@ -1,0 +1,1 @@
+Cada proyecto tiene su propio README para las instrucciones detalladas de instalacion y ejecucion
