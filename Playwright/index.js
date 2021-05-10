@@ -11,8 +11,11 @@ const e17 = require('./escenario17')
 const e12 = require('./escenario12')
 const e16 = require('./escenario16')
 const e20 = require('./escenario20')
-const url = 'http://localhost:2369/ghost/';
 
+const url = 'http://localhost:2368/ghost/';
+const administratorName = 'Ayrton Pastor C.';
+const administratorEmail = 'administrador123@example.com';
+const administratorPassword = 'administrador123';
 
 //Función flecha asíncrona
 (async() => {
@@ -32,9 +35,9 @@ const url = 'http://localhost:2369/ghost/';
             'e1',
             'asdf@uniandes.edu.co',
             'fhadfshdasf',
-            'administrador123@example.com',
-            'administrador123',
-            'Ayrton Pastor C',
+            administratorEmail,
+            administratorPassword,
+            administratorName,
             'staff'
         )
         //Escenario 2 que recibe por parametro:
@@ -51,9 +54,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e2',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'staff',
         'ghost-author@example.com',
         '1234567890$'
@@ -73,9 +76,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e5',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'posts',
         'Post Nuevo Prueba',
         'texto de prueba del post'
@@ -95,9 +98,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e6',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'posts',
         'Post Escenario 6',
         'texto de prueba del post'
@@ -117,9 +120,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e9',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'pages',
         'Page Nueva Prueba',
         'texto de prueba de la pagina'
@@ -139,9 +142,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e13',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'staff/ghost',
         'ghost1',
         'Ghost'
@@ -161,9 +164,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e4',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'posts',
         'Published Post',
         'Descripción de published post.'
@@ -183,9 +186,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e8',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'pages',
         'Página para crear',
         'Descripción de página para crear'
@@ -207,9 +210,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e17',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'pages',
         'Page Nueva Prueba',
         'texto de prueba de la pagina',
@@ -231,9 +234,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e10',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'pages',
         'Pagina Escenario 10',
         'texto de prueba de la pagina'
@@ -253,9 +256,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e12',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'pages',
         'Página para cabecera',
         'Descripción de página para cabecera'
@@ -275,9 +278,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e16',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'Post para etiquetar',
         'TagPrivado',
         'private'
@@ -296,9 +299,9 @@ const url = 'http://localhost:2369/ghost/';
         url,
         'chromium',
         'e20',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
         'Tag para eliminar',
         'public'
     );

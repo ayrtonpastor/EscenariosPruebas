@@ -40,5 +40,9 @@
       </library>
     </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.17.2, ruby-2.6.2-p47) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="did_you_mean (v1.3.0, ruby-2.6.2-p47) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="executable-hooks (v1.6.0, ruby-2.6.2-p47) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.11.3, ruby-2.6.2-p47) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v12.3.2, ruby-2.6.2-p47) [gem]" level="application" />
   </component>
 </module>
