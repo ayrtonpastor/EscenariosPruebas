@@ -2,6 +2,7 @@ const playwright = require('playwright');
 const expect = require('expect');
 let rutaPadre
 let numeroCaptura = 0
+let oldNameStaff
 exports.navegarUrl = async(page, url) => {
     page = page[0]
     rutaPadre = url
@@ -135,4 +136,37 @@ exports.verificarPostEliminado = async(page, tituloPost) => {
     const list = await page.waitForSelector('section.content-list')
     const postTitle = list.$(`.gh-content-entry-title:text("${tituloPost}")`)
     expect(await postTitle).toBe(null);
+}
+
+exports.modificarStaff = async(page, nombre) => {
+    page = page[0];
+    const nameInput = await page.waitForSelector('input[placeholder="Full Name"]')
+    oldNameStaff = await nameInput.innerText()
+    await nameInput.fill(nombre)
+    const saveButt = await page.waitForSelector('button.gh-btn-blue')
+    await saveButt.click()
+}
+
+exports.verificarStaffModificado = async(page, nombre) => {
+    page = page[0];
+    await page.click('a[href="#/staff/"]')
+    const staffCards = await page.waitForSelector('div.apps-grid')
+    const staffName = await staffCards.$(`h3:text("${nombre}")`)
+    expect(await staffName.innerText()).not.toEqual(await oldNameStaff)
+}
+
+exports.navegaraPostExistente = async(page, tituloPost) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost}")`)
+    const divPost = await postTitle.$('xpath=../..')
+    await divPost.click()
+}
+
+
+exports.verificarModalErrorLongTitle = async(page) => {
+    page = page[0]
+    const header = await page.waitForSelector('h1:text("Are you sure you want to leave this page?")')
+    const modal = await header.$('xpath=../..')
+    const leaveButton = await modal.$('.gh-btn-red')
+    await leaveButton.click()
 }
