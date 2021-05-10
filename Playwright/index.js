@@ -163,6 +163,27 @@ const url = 'http://localhost:2368/ghost/';
         'Página para crear',
         'Descripción de página para crear'
     );
+    //Escenario 10 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo de la pagina
+    //@param textPost: texto de la pagina
+    await e10.escenario10(
+            url,
+            'chromium',
+            'e10',
+            'jc@uniandes.edu.co',
+            'Pruebas2021$',
+            'Juan Carlo Nieto',
+            'pages',
+            'Pagina Escenario 10',
+            'texto de prueba de la pagina'
+        );
 
     // Escenario 12 que recibe por parametro:
     // @param url: constante global de url de pagina
