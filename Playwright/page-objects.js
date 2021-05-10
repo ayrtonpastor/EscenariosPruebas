@@ -217,5 +217,48 @@ exports.validarEtiquetaAPost = async(page, postName) => {
     expect(length).toBe(1)
 }
 
+exports.verificarLoginUsuarioCorrecto = async(page,usuario) => {
+    page = page[0]
+    const elem = await page.waitForSelector('span.gh-user-name')
+    expect(await elem.innerHTML()).toBe(usuario)
+}
+exports.realizarCambioPassword = async(page, newPass, password) => {
+    page = page[0]
+    const passNewInput = 'input[id=user-password-new]'
+    const passNewValidInput = 'input[id=user-new-password-verification]'
+
+    await page.click(`css=${passNewInput}`)
+    await page.fill(`css=${passNewInput}`, newPass)
+    await page.click(`css=${passNewValidInput}`)
+    await page.fill(`css=${passNewValidInput}`, newPass)
+    await page.click(`css=${passNewInput}`)
+    await page.click(`css=${passNewValidInput}`)
+    await page.click('button.button-change-password')
+    await this.esperar(1000)
+    
+}
+exports.publicarPostHora = async(page) => {
+    page = page[0];
+    const publishMenu = await page.waitForSelector('.gh-publishmenu')
+    await publishMenu.click();
+    const timeButton = await page.waitForSelector('.gh-date-time-picker-date')
+    await timeButton.click();
+    const timeNextButton = await page.waitForSelector('.ember-power-calendar-nav-control--next')
+    await timeNextButton.click();
+    const frameButton = await page.waitForSelector('.ember-power-calendar-nav-title')
+    await frameButton.click();
+    
+    await timeButton.click();
+    const publishButton = await page.waitForSelector('.gh-publishmenu-button')
+    await publishButton.click();
+}
+exports.verificarPostProgramado = async(page, tituloPost) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost}")`)
+    const divPost = await postTitle.$('xpath=../..')
+    const badgeStatus = await divPost.$('span.gh-content-status-draft')
+    expect(await badgeStatus.innerText()).toBe('SCHEDULED')
+}
+
 const trimLowerAndAddMinus = (s) =>
     s.replace(/ /g, "-").toLowerCase().trim();

@@ -32,6 +32,27 @@ const url = 'http://localhost:2368/ghost/';
         'Ayrton Pastor C.',
         'staff'
     )
+    //Escenario 2 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    e2.escenario2(
+            url,
+            'chromium',
+            'e2',
+            'jc@uniandes.edu.co',
+            'Pruebas2021$',
+            'Juan Carlo Nieto',
+            'staff',
+            'ghost-author@example.com',
+            '1234567890$'
+        );
 
     //Escenario 5 que recibe por parametro:
     //@param url: constante global de url de pagina
