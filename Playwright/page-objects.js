@@ -351,7 +351,7 @@ exports.realizarCambioPassword = async(page, newPass, password) => {
     await page.click(`css=${passNewValidInput}`)
     await page.click('button.button-change-password')
     await this.esperar(1000)
-
+    await page.click('button.gh-notification-close')
 }
 exports.publicarPostHora = async(page) => {
     page = page[0];
