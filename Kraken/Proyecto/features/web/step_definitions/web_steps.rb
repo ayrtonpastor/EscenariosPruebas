@@ -1,6 +1,8 @@
 if ENV["ADB_DEVICE_ARG"].nil?
   
-  $url_id = nil
+  $username = "administrador123@example.com"
+  $password = "administrador123"
+  $profile_name = "Pedro"
 
   require 'kraken-mobile/steps/web/kraken_steps'
 
@@ -8,6 +10,15 @@ if ENV["ADB_DEVICE_ARG"].nil?
     $url_variable = @driver.current_url    
     File.write('./.variable.txt', $url_variable)
     puts($url_variable) 
+  end
+
+  Then(/^I login with credentials$/) do
+    @driver.find_element(:xpath, "//*[@name='identification']").send_keys($username)
+    sleep 1
+    @driver.find_element(:xpath, "//*[@name='password']").send_keys($password)
+    sleep 1
+    @driver.find_element(:css, ".login").click
+    sleep 2
   end
 
   
@@ -85,14 +96,14 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//*[@href='#/editor/#{type_element}']").click()
   end
 
-  Then(/^I change post owner from "([^"]*)" to "([^"]*)"$/) do |old_owner, new_owner|
+  Then(/^I change post owner from current to "([^"]*)"$/) do |new_owner|
     @driver.find_element(:xpath, "//button[@class='post-settings']").click()
     sleep 1
     @driver.find_element(:xpath, "//div[label[text()='Authors']]//div[@role='button']").click()
     sleep 1
     @driver.find_element(:xpath, "//ul[@role='listbox']//li[@role='option' and text()='#{new_owner}']").click()
     sleep 2
-    @driver.find_element(:xpath, "//*[@class='settings-menu-container']//li[text()='#{old_owner}']//span").click()
+    @driver.find_element(:xpath, "//*[@class='settings-menu-container']//li[text()='#{$profile_name}']//span").click()
     sleep 1
     @driver.find_element(:xpath, "//button[@class='close settings-menu-header-action']").click()
     sleep 1
