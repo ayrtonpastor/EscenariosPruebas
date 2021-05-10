@@ -1,12 +1,22 @@
 const e1 = require('./escenario1');
 const e3 = require('./escenario3');
+const e2 = require('./escenario2');
+const e4 = require('./escenario4');
 const e5 = require('./escenario5');
+const e6 = require('./escenario6');
 const e7 = require('./escenario7');
+const e8 = require('./escenario8');
 const e9 = require('./escenario9');
+const e10 = require('./escenario10');
 const e11 = require('./escenario11');
+const e12 = require('./escenario12');
+const e13 = require('./escenario13');
 const e15 = require('./escenario15');
+const e16 = require('./escenario16');
+const e17 = require('./escenario17');
+const e18 = require('./escenario18');
 const e19 = require('./escenario19');
-
+const e20 = require('./escenario20');
 
 const url = 'http://localhost:2368/ghost/';
 
@@ -14,8 +24,9 @@ const username = 'administrador123@example.com';
 const password = 'administrador123';
 const profile_name = 'Pedro';
 
+
 //Función flecha asíncrona
-(async() => {
+(async () => {
     /*
     */
     //Escenario 1 que recibe por parametro:
@@ -29,26 +40,83 @@ const profile_name = 'Pedro';
     //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     await e1.escenario1(
+        url,
+        'chromium',
+        'e1',
+        'asdf@uniandes.edu.co',
+        'fhadfshdasf',
+        username,
+        password,
+        profile_name,
+        'staff'
+    )
+    //Escenario 2 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    
+    await e2.escenario2(
+        url,
+        'chromium',
+        'e2',
+        username,
+        password,
+        profile_name,
+        'staff',
+        'ghost-author@example.com',
+        '1234567890$'
+    );
+    
+
+    await e3.escenario3
+        (
             url,
             'chromium',
-            'e1',
-            'asdf@uniandes.edu.co',
-            'fhadfshdasf',
+            'e3',
             username,
             password,
-            profile_name,
-            'staff'
+            'posts',
+            "Nuevo Post"
         )
-        //Escenario 5 que recibe por parametro:
-        //@param url: constante global de url de pagina
-        //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-        //@param scenarioTag: tag del escenario
-        //@param correctEmail: un correo valido y existente para el login
-        //@param correctPass: una contraseña valida y correcta para el login
-        //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-        //@param navSubRoute: ruta a la que se quiere navegar en la prueba
-        //@param postTitle: titulo del post
-        //@param textPost: texto del post
+
+    //Escenario 4 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    await e4.escenario4(
+        url,
+        'chromium',
+        'e4',
+        username,
+        password,
+        profile_name,
+        'posts',
+        'Published Post',
+        'Descripción de published post.'
+    );
+
+    //Escenario 5 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
     await e5.escenario5(
         url,
         'chromium',
@@ -60,6 +128,62 @@ const profile_name = 'Pedro';
         'Post Nuevo Prueba',
         'texto de prueba del post'
     );
+
+    //Escenario 6 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    await e6.escenario6(
+        url,
+        'chromium',
+        'e6',
+        username,
+        password,
+        profile_name,
+        'posts',
+        'Post Escenario 6',
+        'texto de prueba del post'
+    );
+
+    await e7.escenario7
+        (
+            url,
+            'chromium',
+            'e7',
+            username,
+            password,
+            'pages',
+            "Nueva Pagina"
+        )
+
+    // Escenario 8 que recibe por parametro:
+    // @param url: constante global de url de pagina
+    // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    // @param scenarioTag: tag del escenario
+    // @param correctEmail: un correo valido y existente para el login
+    // @param correctPass: una contraseña valida y correcta para el login
+    // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    // @param navSubRoute: ruta a la que se quiere navegar en la prueba
+    // @param pageTitle: titulo del page
+    // @param pageDescription: texto del page
+    await e8.escenario8(
+        url,
+        'chromium',
+        'e8',
+        username,
+        password,
+        profile_name,
+        'pages',
+        'Página para crear',
+        'Descripción de página para crear'
+    );
+
 
     //Escenario 9 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -82,62 +206,202 @@ const profile_name = 'Pedro';
         'Page Nueva Prueba',
         'texto de prueba de la pagina'
     );
-    
-   await e3.escenario3
-   (
-       url,
-       'chromium',
-       'e3',
-       username,
-       password,
-       'posts',
-       "Nuevo Post"
-   )
-    
-   await e7.escenario7
-   (
-       url,
-       'chromium',
-       'e7',
-       username,
-       password,
-       'pages',
-       "Nueva Pagina"   
-   )
-   
-  await e11.escenario11
-  (
-    url,
-    'chromium',
-    'e11',
-    username,
-    password,
-    'posts',
-    'Post Nuevo',
-    profile_name,
-    'Ghost'
-  )
-  
-    await e15.escenario15
-    (
+
+
+
+
+    //Escenario 10 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo de la pagina
+    //@param textPost: texto de la pagina
+    await e10.escenario10(
         url,
         'chromium',
-        'e15',
+        'e10',
         username,
         password,
-        'posts',
-        'Post Con Imagen'
-    )
+        profile_name,
+        'pages',
+        'Pagina Escenario 10',
+        'texto de prueba de la pagina'
+    );
+
+
+    await e11.escenario11
+        (
+            url,
+            'chromium',
+            'e11',
+            username,
+            password,
+            'posts',
+            'Post Nuevo',
+            profile_name,
+            'Ghost'
+        )
+
+    // Escenario 12 que recibe por parametro:
+    // @param url: constante global de url de pagina
+    // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    // @param scenarioTag: tag del escenario
+    // @param correctEmail: un correo valido y existente para el login
+    // @param correctPass: una contraseña valida y correcta para el login
+    // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    // @param navSubRoute: ruta a la que se quiere navegar en la prueba
+    // @param pageTitle: titulo del page
+    // @param pageDescription: texto del page
+    await e12.escenario12(
+        url,
+        'chromium',
+        'e12',
+        username,
+        password,
+        profile_name,
+        'pages',
+        'Página para cabecera',
+        'Descripción de página para cabecera'
+    );
+
+
+    //Escenario 13 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param newStaffName: nuevo nombre del staff a modificar
+    //@param oldStaffName: nombre actual del staff a modificar
+    await e13.escenario13(
+        url,
+        'chromium',
+        'e13',
+        username,
+        password,
+        profile_name,
+        'staff/ghost',
+        'ghost1',
+        'Ghost'
+    );
+
+
+    await e15.escenario15
+        (
+            url,
+            'chromium',
+            'e15',
+            username,
+            password,
+            'posts',
+            'Post Con Imagen'
+        )
+
+    // Scene 16's params:
+    // @param url: global url
+    // @param browser: chromium firefox or webkit
+    // @param scenarioTag: scene's tag
+    // @param email: email of the admin
+    // @param password: password of the admin
+    // @param loggedUserName: full_name of the admin
+    // @param postName: name of the post
+    // @param tagName: name of the tag
+    // @param tagStatus: public or private
+    await e16.escenario16(
+        url,
+        'chromium',
+        'e16',
+        username,
+        password,
+        profile_name,
+        'Post para etiquetar',
+        'TagPrivado',
+        'private'
+    );
+
+
+    //Escenario 17 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post,
+    //@Param longPostTitle: titulo de mas de 255 caracteres
+    await e17.escenario17(
+        url,
+        'chromium',
+        'e17',
+        username,
+        password,
+        profile_name,
+        'pages',
+        'Page Nueva Prueba',
+        'texto de prueba de la pagina',
+        'dadsfasdffffffffffffffffffffffffsdfsdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffferqewrqerqwreSADASdASDSDSFDASDFADSFADSFADSFABCDQa'
+    );
+
+    //Escenario 18 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    //@param tagName: nombre del tag a crear
+    //@param tagStatus: tipo de tag a crear
+    await e18.escenario18(
+        url,
+        'chromium',
+        'e18',
+        username,
+        password,
+        profile_name,
+        'Post Escenario 18',
+        'texto de prueba del post',
+        'TagPublica',
+        'public'
+    );
 
     await e19.escenario19
-    (
+        (
+            url,
+            'chromium',
+            'e19',
+            username,
+            password,
+            'posts',
+            'Post agendado'
+        )
+
+    // Scene 20's params:
+    // @param url: global url
+    // @param browser: chromium firefox or webkit
+    // @param scenarioTag: scene's tag
+    // @param email: email of the admin
+    // @param password: password of the admin
+    // @param loggedUserName: full_name of the admin
+    // @param tagName: name of the tag
+    // @param tagStatus: public or private
+    await e20.escenario20(
         url,
         'chromium',
-        'e19',
+        'e20',
         username,
         password,
-        'posts',
-        'Post agendado'
-    )
-
+        profile_name,
+        'Tag para eliminar',
+        'public'
+    );
 })(); //Llamado propio de la función
