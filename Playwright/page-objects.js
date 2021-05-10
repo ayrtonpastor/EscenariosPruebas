@@ -99,6 +99,89 @@ exports.escribirMockEnPost = async(page, title, texto) => {
     await inputText.fill(texto);
 }
 
+exports.guardarDraft = async(page, type_element) => {
+    page = page[0];
+    await page.click(`xpath=//*[@href='#/${type_element}']`);
+}
+
+exports.clickElementWithTile = async(page, title) => {
+    page = page[0];
+    await this.esperar(1000)
+    await page.click(`xpath=//a/h3[text()='${title}'][1]`);
+    await this.esperar(1000)
+}
+
+exports.deleteCurrentDraft = async(page) => {
+    page = page[0];
+    await page.click(`xpath=//button[@class='post-settings']`)
+    await this.esperar(1000)
+    await page.click(`xpath=//*[@class='settings-menu-container']//button[contains(@class,'settings-menu-delete-button')]`)
+    await this.esperar(1000)
+    await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`)
+}
+
+exports.guardarDraft = async(page, type_element) => {
+    page = page[0];
+    await page.click(`xpath=//*[@href='#/${type_element}']`);
+}
+
+exports.changePostOwner = async(page, old_owner, new_owner) => {
+    page = page[0];
+    await page.click(`xpath=//button[@class='post-settings']`)
+    await this.esperar(1000)
+    await page.click(`xpath=//div[label[text()='Authors']]//div[@role='button']`)
+    await this.esperar(1000)
+    await page.click(`xpath=//ul[@role='listbox']//li[@role='option' and text()='${new_owner}']`)
+    await this.esperar(1000)
+    const pedroEl = await page.waitForSelector(`xpath=//*[@class='settings-menu-container']//li[text()='${old_owner}']`)
+    const button = await pedroEl.waitForSelector(`xpath=//span[@role='button'][1]`)
+    await button.click();
+    await this.esperar(2000)
+    await page.click(`xpath=//button[@class='close settings-menu-header-action']`)
+    await this.esperar(1000)
+}
+
+exports.schedulePublishPost = async(page) => {
+    page = page[0]
+    await this.esperar(2000)
+    await page.click(`xpath=//div/span[text()='Publish']`)
+    await this.esperar(2000)
+    await page.click(`xpath=//div[contains(@class,'gh-publishmenu-radio')]//div[text()='Schedule it for later']`)
+    await this.esperar(2000)
+    await page.click(`xpath=//button[contains(@class,'gh-publishmenu-button')]//span[text()='Schedule']`)
+}
+
+exports.enterImageContentToPost = async(page) => {
+    page = page[0]
+    await page.click(`xpath=//*[@data-placeholder='Begin writing your post...']`)
+    await this.esperar(1000)
+    await page.click(`xpath=//button[contains(@class,'koenig-plus-menu-button')]`)
+    await this.esperar(1000)
+    await page.click(`xpath=//div[@data-kg='cardmenu-card']//div[text()='HTML']`)
+    await this.esperar(1000)
+    await page.keyboard.insertText("<img src='https://ichef.bbci.co.uk/news/640/cpsprodpb/15A5F/production/_115017688_c6122844-332e-4516-a812-e56991e9374a.jpg'/>");    
+}
+
+exports.performActionOnElement = async(page, action, type_element) => {
+    page = page[0];
+    if(action != "Publish" && action != "Update" ){
+        throw "Elemento no soportado, debe ser Page o Post";
+    }
+    if(type_element != "Post" && type_element != "Page"){
+        throw "Elemento no soportado, debe ser Page o Post";
+    }
+
+    if(action == "Publish"){
+        await page.keyboard.press('Enter');
+    }
+    await this.esperar(2000);
+    await page.click(`xpath=//div/span[text()='${action}']`);
+    await this.esperar(2000);
+    await page.click(`//button[contains(@class,'gh-publishmenu-button')]//span[text()='${action}']`);
+
+
+}
+
 exports.publicarPost = async(page) => {
     page = page[0];
     const publishMenu = await page.waitForSelector('.gh-publishmenu')
