@@ -1,11 +1,15 @@
 const e1 = require('./escenario1')
+const e2 = require('./escenario2')
 const e4 = require('./escenario4')
 const e5 = require('./escenario5')
+const e6 = require('./escenario6')
 const e8 = require('./escenario8')
 const e9 = require('./escenario9')
+const e10 = require('./escenario10')
 const e12 = require('./escenario12')
 const e16 = require('./escenario16')
-const e20 = require('./escenario20')
+const e18 = require('./escenario18')
+const e20s = require('./escenario20')
 
 const url = 'http://localhost:2368/ghost/';
 
@@ -229,6 +233,29 @@ const url = 'http://localhost:2368/ghost/';
         'private'
     );
 
+    //Escenario 18 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    //@param tagName: nombre del tag a crear
+    //@param tagStatus: tipo de tag a crear
+    await e18.escenario18(
+        url,
+        'chromium',
+        'e18',
+        'jc@uniandes.edu.co',
+        'Pruebas2021$',
+        'Juan Carlo Nieto',
+        'Post Escenario 18',
+        'texto de prueba del post',
+        'TagPublica',
+        'public'
+    );
     // Scene 20's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
