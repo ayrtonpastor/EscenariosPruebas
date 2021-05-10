@@ -24,9 +24,9 @@ const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
 
 //Función flecha asíncrona
-(async () => {
+(async() => {
     /*
-    */
+     */
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -71,8 +71,7 @@ const administratorPassword = 'administrador123';
         '1234567890$'
     );
 
-    await e3.escenario3
-    (
+    await e3.escenario3(
         url,
         'chromium',
         'e3',
@@ -159,8 +158,7 @@ const administratorPassword = 'administrador123';
         'texto de prueba del post'
     );
 
-    await e7.escenario7
-    (
+    await e7.escenario7(
         url,
         'chromium',
         'e7',
@@ -236,8 +234,7 @@ const administratorPassword = 'administrador123';
         'texto de prueba de la pagina'
     );
 
-    await e11.escenario11
-    (
+    await e11.escenario11(
         url,
         'chromium',
         'e11',
@@ -245,7 +242,7 @@ const administratorPassword = 'administrador123';
         administratorPassword,
         'posts',
         'Post Nuevo',
-        profile_name,
+        administratorName,
         'Ghost'
     );
 
@@ -293,8 +290,7 @@ const administratorPassword = 'administrador123';
         'Ghost'
     );
 
-    await e15.escenario15
-    (
+    await e15.escenario15(
         url,
         'chromium',
         'e15',
@@ -374,8 +370,7 @@ const administratorPassword = 'administrador123';
         'public'
     );
 
-    await e19.escenario19
-    (
+    await e19.escenario19(
         url,
         'chromium',
         'e19',

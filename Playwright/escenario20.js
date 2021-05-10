@@ -1,7 +1,8 @@
 const po = require('./page-objects')
 exports.escenario20 = async(url, browser, scenarioTag, email, password, loggedUserName, tagName, tagStatus) => {
 
-    //construye y dispara el navegador por parametro "chromium, firefox o webkit"
+    console.log('Inicia escenario: ' + scenarioTag)
+        //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
 
     //navega a la url que llega por parametro

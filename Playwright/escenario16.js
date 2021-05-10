@@ -1,6 +1,8 @@
 const po = require('./page-objects')
 exports.escenario16 = async(url, browser, scenarioTag, email, password, loggedUserName, postName, tagName, tagStatus) => {
 
+    console.log('Inicia escenario: ' + scenarioTag)
+
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
 
@@ -37,7 +39,7 @@ exports.escenario16 = async(url, browser, scenarioTag, email, password, loggedUs
     await po.tomarCaptura(page, scenarioTag)
 
     // completar formulario y asignar etiqueta
-    await po.escribirMockEnPost(page, postName, "Descripción de "+postName.toLowerCase())
+    await po.escribirMockEnPost(page, postName, "Descripción de " + postName.toLowerCase())
     await po.tomarCaptura(page, scenarioTag)
     await po.asignarEtiquetaAPost(page, postName, tagName, tagStatus)
     await po.publicarPost(page);
