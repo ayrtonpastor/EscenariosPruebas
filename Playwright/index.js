@@ -9,12 +9,14 @@ const e10 = require('./escenario10')
 const e12 = require('./escenario12')
 const e16 = require('./escenario16')
 const e18 = require('./escenario18')
-const e20s = require('./escenario20')
+const e13 = require('./escenario13')
+const e17 = require('./escenario17')
+const e20 = require('./escenario20')
+const url = 'http://localhost:2369/ghost/';
 
-const url = 'http://localhost:2368/ghost/';
 
 //Función flecha asíncrona
-(async () => {
+(async() => {
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -26,37 +28,37 @@ const url = 'http://localhost:2368/ghost/';
     //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     await e1.escenario1(
-        url,
-        'chromium',
-        'e1',
-        'asdf@uniandes.edu.co',
-        'fhadfshdasf',
-        'administrador123@example.com',
-        'administrador123',
-        'Ayrton Pastor C.',
-        'staff'
-    )
-    //Escenario 2 que recibe por parametro:
-    //@param url: constante global de url de pagina
-    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    //@param scenarioTag: tag del escenario
-    //@param correctEmail: un correo valido y existente para el login
-    //@param correctPass: una contraseña valida y correcta para el login
-    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
-    //@param postTitle: titulo del post
-    //@param textPost: texto del post
-    await e2.escenario2(
             url,
             'chromium',
-            'e2',
-            'jc@uniandes.edu.co',
-            'Pruebas2021$',
-            'Juan Carlo Nieto',
-            'staff',
-            'ghost-author@example.com',
-            '1234567890$'
-        );
+            'e1',
+            'asdf@uniandes.edu.co',
+            'fhadfshdasf',
+            'administrador123@example.com',
+            'administrador123',
+            'Ayrton Pastor C',
+            'staff'
+        )
+        //Escenario 2 que recibe por parametro:
+        //@param url: constante global de url de pagina
+        //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+        //@param scenarioTag: tag del escenario
+        //@param correctEmail: un correo valido y existente para el login
+        //@param correctPass: una contraseña valida y correcta para el login
+        //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+        //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+        //@param postTitle: titulo del post
+        //@param textPost: texto del post
+    await e2.escenario2(
+        url,
+        'chromium',
+        'e2',
+        'administrador123@example.com',
+        'administrador123',
+        'Ayrton Pastor C',
+        'staff',
+        'ghost-author@example.com',
+        '1234567890$'
+    );
 
     //Escenario 5 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -74,7 +76,7 @@ const url = 'http://localhost:2368/ghost/';
         'e5',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'posts',
         'Post Nuevo Prueba',
         'texto de prueba del post'
@@ -91,16 +93,16 @@ const url = 'http://localhost:2368/ghost/';
     //@param postTitle: titulo del post
     //@param textPost: texto del post
     await e6.escenario6(
-            url,
-            'chromium',
-            'e6',
-            'jc@uniandes.edu.co',
-            'Pruebas2021$',
-            'Juan Carlo Nieto',
-            'posts',
-            'Post Escenario 6',
-            'texto de prueba del post'
-        );
+        url,
+        'chromium',
+        'e6',
+        'administrador123@example.com',
+        'administrador123',
+        'Ayrton Pastor C',
+        'posts',
+        'Post Escenario 6',
+        'texto de prueba del post'
+    );
 
     //Escenario 9 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -118,10 +120,32 @@ const url = 'http://localhost:2368/ghost/';
         'e9',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'pages',
         'Page Nueva Prueba',
         'texto de prueba de la pagina'
+    );
+
+    //Escenario 13 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param newStaffName: nuevo nombre del staff a modificar
+    //@param oldStaffName: nombre actual del staff a modificar
+    await e13.escenario13(
+        url,
+        'chromium',
+        'e13',
+        'administrador123@example.com',
+        'administrador123',
+        'Ayrton Pastor C',
+        'staff/ghost',
+        'ghost1',
+        'Ghost'
     );
 
     //Escenario 4 que recibe por parametro:
@@ -140,7 +164,7 @@ const url = 'http://localhost:2368/ghost/';
         'e4',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'posts',
         'Published Post',
         'Descripción de published post.'
@@ -162,11 +186,38 @@ const url = 'http://localhost:2368/ghost/';
         'e8',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'pages',
         'Página para crear',
         'Descripción de página para crear'
     );
+
+
+    //Escenario 17 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post,
+    //@Param longPostTitle: titulo de mas de 255 caracteres
+    await e17.escenario17(
+        url,
+        'chromium',
+        'e17',
+        'administrador123@example.com',
+        'administrador123',
+        'Ayrton Pastor C',
+        'pages',
+        'Page Nueva Prueba',
+        'texto de prueba de la pagina',
+        'dadsfasdffffffffffffffffffffffffsdfsdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffferqewrqerqwreSADASdASDSDSFDASDFADSFADSFADSFABCDQa'
+    );
+
+
     //Escenario 10 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -178,16 +229,16 @@ const url = 'http://localhost:2368/ghost/';
     //@param postTitle: titulo de la pagina
     //@param textPost: texto de la pagina
     await e10.escenario10(
-            url,
-            'chromium',
-            'e10',
-            'jc@uniandes.edu.co',
-            'Pruebas2021$',
-            'Juan Carlo Nieto',
-            'pages',
-            'Pagina Escenario 10',
-            'texto de prueba de la pagina'
-        );
+        url,
+        'chromium',
+        'e10',
+        'administrador123@example.com',
+        'administrador123',
+        'Ayrton Pastor C',
+        'pages',
+        'Pagina Escenario 10',
+        'texto de prueba de la pagina'
+    );
 
     // Escenario 12 que recibe por parametro:
     // @param url: constante global de url de pagina
@@ -205,7 +256,7 @@ const url = 'http://localhost:2368/ghost/';
         'e12',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'pages',
         'Página para cabecera',
         'Descripción de página para cabecera'
@@ -227,7 +278,7 @@ const url = 'http://localhost:2368/ghost/';
         'e16',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'Post para etiquetar',
         'TagPrivado',
         'private'
@@ -271,7 +322,7 @@ const url = 'http://localhost:2368/ghost/';
         'e20',
         'administrador123@example.com',
         'administrador123',
-        'Ayrton Pastor C.',
+        'Ayrton Pastor C',
         'Tag para eliminar',
         'public'
     );

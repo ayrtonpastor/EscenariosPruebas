@@ -2,14 +2,14 @@ const po = require('./page-objects')
 exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, ghostEmail, newPass) => {
 
     console.log('Escenario 2: Cambiar contrasena usuario Ghost')
-    
+
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
 
-     //navega a la url que llega por parametro
+    //navega a la url que llega por parametro
     await po.navegarUrl(page, url)
 
-     //Realiza una captura de pantalla para un tag de escenario enviado por parametro   
+    //Realiza una captura de pantalla para un tag de escenario enviado por parametro   
     await po.tomarCaptura(page, scenarioTag)
 
     //escribe correo y contraseña enviados por parametro en los inputs respectivos
@@ -19,30 +19,30 @@ exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass,
     await po.clickBotonLogin(page)
 
     //verifica que el login se haga correctamente y que se visualice la pagina principal de ghost    
-    await po.verificarLoginUsuarioCorrecto(page,loggedUserName)
+    await po.verificarLoginUsuarioCorrecto(page, loggedUserName)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     // navega a una subruta dada por parametro 
     await po.navegarA(page, navSubRoute)
-    //...
+        //...
     await po.tomarCaptura(page, scenarioTag)
 
     // navega a una subruta dada por parametro 
-    await po.navegarA(page, navSubRoute +'/ghost')
-    
+    await po.navegarA(page, navSubRoute + '/ghost')
+
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     // Realiza el cambio de password del usuario Ghost
     await po.realizarCambioPassword(page, newPass)
-    
+
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     //Cierra la sesion
-    await po.cerrarSesion(page)
+    await po.cerrarSesion(page, loggedUserName)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
@@ -54,13 +54,13 @@ exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass,
     await po.clickBotonLogin(page)
 
     //Verifica que se ingreso con el usuario Ghost
-    await po.verificarLoginUsuarioCorrecto(page,'Ghost')
+    await po.verificarLoginUsuarioCorrecto(page, 'Ghost')
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     //Cierra la sesion de usuario Ghost
-    await po.cerrarSesion(page)
+    await po.cerrarSesion(page, 'Ghost')
 
     //cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
