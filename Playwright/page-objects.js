@@ -27,7 +27,6 @@ exports.construirBrowser = async(browserType) => {
     const context = await browser.newContext();
 
     return [await context.newPage(), browser];
-
 }
 
 exports.esperar = async(tiempo) => {
@@ -169,4 +168,131 @@ exports.verificarModalErrorLongTitle = async(page) => {
     const modal = await header.$('xpath=../..')
     const leaveButton = await modal.$('.gh-btn-red')
     await leaveButton.click()
+}
+exports.asignarPageANavBar = async(page, pageTitle) => {
+    page = page[0];
+    await page.type(`xpath=/html/body/div[2]/div/main/section/section/div[2]/form/div[2]/div/span[1]/input`, `${pageTitle}`);
+    await page.keyboard.press('Tab');
+    await page.keyboard.type(`${trimLowerAndAddMinus(pageTitle)}`);
+}
+
+exports.clicEn = async(page, textElement) => {
+    page = page[0];
+    await page.$eval(`"${textElement}"`, (element) => {
+        element.scrollIntoView();
+    });
+    await page.click(`"${textElement}"`);
+}
+
+exports.desasignarPageANavBar = async(page) => {
+    page = page[0];
+    await page.reload()
+    await page.click(`xpath=//html/body/div[2]/div/main/section/section/div[2]/form/div[1]/div[5]/div/button`);
+}
+
+exports.completarParametrosDeTag = async(page, tagName, tagStatus) => {
+    page = page[0];
+    await page.type(`input[id="tag-name"]`, `${tagStatus === 'private' ? '#' : ''}${tagName.toLowerCase().trim()}`);
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.type(`Descripción de tag ${tagName.toLowerCase().trim()}`);
+}
+
+exports.filtrarYEditarTag = async(page, tagName, tagStatus) => {
+    page = page[0];
+    await page.reload();
+    if (tagStatus === 'private') {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[2]`);
+    } else {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
+    }
+    await page.click(`a[href="#/tags/${(tagStatus === 'private' ? 'hash-' : '')+trimLowerAndAddMinus(tagName)}/"]`);
+}
+
+exports.eliminarTag = async(page) => {
+    page = page[0];
+    await page.reload();
+    await page.click(`xpath=//html/body/div[2]/div/main/section/button`);
+    await page.click(`xpath=//html/body/div[4]/div[2]/div/div/div/div[2]/section/div[2]/button[2]`);
+}
+
+exports.validarEliminacionDeTag = async(page, tagName, tagStatus) => {
+    page = page[0];
+    if (tagStatus === 'private') {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[2]`);
+    } else {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
+    }
+    const length = await page.$$eval(`text="${tagName.trim()}"`, (items) => items.length);
+    expect(length).toBe(0)
+}
+
+exports.asignarEtiquetaAPost = async(page, postName, tagName, tagStatus) => {
+    page = page[0];
+    await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/button`);
+    await page.type(`xpath=//html/body/div[4]/div[1]/div/div/div/div/div[1]/div/div[1]/div[2]/form/div[3]/div/div/div/div[1]/ul/input`,
+        `${tagStatus == 'private' ? '#' : ''}${tagName.trim()}`);
+    await page.keyboard.press('Tab');
+    await page.click(`xpath=//html/body/div[4]/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/button`);
+}
+
+exports.filtrarPostsPorTag = async(page, tagName, tagStatus) => {
+    page = page[0];
+    await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/div[3]/div[1]`);
+    await page.keyboard.type(`${tagStatus === 'private' ? '#' : ''}${tagName.trim()}`);
+    await page.keyboard.press('Enter');
+}
+
+exports.validarEtiquetaAPost = async(page, postName) => {
+    page = page[0];
+
+    const length = await page.$$eval(`text="${postName.trim()}"`, (items) => items.length);
+    expect(length).toBe(1)
+}
+
+exports.verificarLoginUsuarioCorrecto = async(page, usuario) => {
+    page = page[0]
+    const elem = await page.waitForSelector('span.gh-user-name')
+    expect(await elem.innerHTML()).toBe(usuario)
+}
+exports.realizarCambioPassword = async(page, newPass, password) => {
+    page = page[0]
+    const passNewInput = 'input[id=user-password-new]'
+    const passNewValidInput = 'input[id=user-new-password-verification]'
+
+    await page.click(`css=${passNewInput}`)
+    await page.fill(`css=${passNewInput}`, newPass)
+    await page.click(`css=${passNewValidInput}`)
+    await page.fill(`css=${passNewValidInput}`, newPass)
+    await page.click(`css=${passNewInput}`)
+    await page.click(`css=${passNewValidInput}`)
+    await page.click('button.button-change-password')
+    await this.esperar(1000)
+
+}
+exports.publicarPostHora = async(page) => {
+    page = page[0];
+    const publishMenu = await page.waitForSelector('.gh-publishmenu')
+    await publishMenu.click();
+    const timeButton = await page.waitForSelector('.gh-date-time-picker-date')
+    await timeButton.click();
+    const timeNextButton = await page.waitForSelector('.ember-power-calendar-nav-control--next')
+    await timeNextButton.click();
+    const frameButton = await page.waitForSelector('.ember-power-calendar-nav-title')
+    await frameButton.click();
+
+    await timeButton.click();
+    const publishButton = await page.waitForSelector('.gh-publishmenu-button')
+    await publishButton.click();
+}
+exports.verificarPostProgramado = async(page, tituloPost) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost}")`)
+    const divPost = await postTitle.$('xpath=../..')
+    const badgeStatus = await divPost.$('span.gh-content-status-draft')
+    expect(await badgeStatus.innerText()).toBe('SCHEDULED')
+}
+
+const trimLowerAndAddMinus = (s) => {
+    s.replace(/ /g, "-").toLowerCase().trim();
 }

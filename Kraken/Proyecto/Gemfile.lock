@@ -76,6 +76,8 @@ GEM
     necromancer (0.4.0)
     nokogiri (1.11.3-x64-mingw32)
       racc (~> 1.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.14.0)
     pastel (0.7.4)
       equatable (~> 0.6)
@@ -87,7 +89,6 @@ GEM
       rack (>= 1.0, < 3)
     regexp_parser (1.8.2)
     retriable (2.0.2)
-    rexml (3.2.3.1)
     rubyzip (1.2.1)
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
@@ -115,10 +116,10 @@ GEM
 
 PLATFORMS
   x64-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   kraken-mobile!
-  rexml
   rubyzip (= 1.2.1)
 
 BUNDLED WITH
