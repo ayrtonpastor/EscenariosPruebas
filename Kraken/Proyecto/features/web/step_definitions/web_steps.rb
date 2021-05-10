@@ -10,13 +10,15 @@ if ENV["ADB_DEVICE_ARG"].nil?
     puts($url_variable) 
   end
 
+  
   Given(/^I navigate to page with the url stored in the variable$/) do
     $url_variable = IO.read("./.variable.txt")  
     puts($url_variable)
     @driver.navigate.to $url_variable
     sleep 2
   end
-
+  
+  
   Then(/^I click on list element with title "([^"]*)"$/) do |title|
     sleep 2
     @driver.find_element(:xpath, "//a/h3[text()='#{title}'][1]").click()
@@ -29,6 +31,16 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//*[@class='settings-menu-container']//button[contains(@class,'settings-menu-delete-button')]").click()
     sleep 1
     @driver.find_element(:xpath, "(//*[@class='modal-footer']//button)[2]").click()
+  end
+
+  Then(/^I schedule publish post$/) do
+    @driver.action.send_keys("\n").perform
+    sleep 2
+    @driver.find_element(:xpath, "//div/span[text()='Publish']").click()
+    sleep 2
+    @driver.find_element(:xpath, "//div[contains(@class,'gh-publishmenu-radio')]//div[text()='Schedule it for later']").click()
+    sleep 2
+    @driver.find_element(:xpath, "//button[contains(@class,'gh-publishmenu-button')]//span[text()='Schedule']").click()
   end
 
   Then(/^I "([^"]*)" current "([^"]*)"$/) do |action, type_element|
@@ -48,6 +60,16 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//div/span[text()='#{action}']").click()
     sleep 2
     @driver.find_element(:xpath, "//button[contains(@class,'gh-publishmenu-button')]//span[text()='#{action}']").click()
+  end
+
+  Then(/^I enter image content to post$/) do
+    @driver.find_element(:xpath, "//*[@data-placeholder='Begin writing your post...']").click()
+    sleep 1
+    @driver.find_element(:xpath, "//button[contains(@class,'koenig-plus-menu-button')]").click()
+    sleep 1
+    @driver.find_element(:xpath, "//div[@data-kg='cardmenu-card']//div[text()='HTML']").click()
+    sleep 1
+    @driver.action.send_keys("<img src='https://ichef.bbci.co.uk/news/640/cpsprodpb/15A5F/production/_115017688_c6122844-332e-4516-a812-e56991e9374a.jpg'/>").perform
   end
 
   Then(/^I navigate to menu "([^"]*)"$/) do |menu_item|
