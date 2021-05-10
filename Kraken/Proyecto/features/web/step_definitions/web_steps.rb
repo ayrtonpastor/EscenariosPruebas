@@ -137,14 +137,14 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//html/body/div[2]/div/main/section/section/ol/li[2]/a[2]").click
     sleep 2
     # click on the engine
-    @driver.find_element(:xpath, "//html/body/div[2]/div/main/section/header/section/button").click
-    sleep 2
+    @driver.find_element(:xpath, "//button[@class='post-settings']").click
+    sleep 1
     # click on the delete
-    @driver.find_element(:xpath, "//html/body/div[4]/div[1]/div/div/div/div/div[1]/div/div[1]/div[2]/form/button").click
-    sleep 2
+    @driver.find_element(:xpath, "//*[@class='settings-menu-container']//button[contains(@class,'settings-menu-delete-button')]").click
+    sleep 1
     # click to confirm the delete
-    @driver.find_element(:xpath, "//html/body/div[4]/div[3]/div/div/div/div[2]/section/div[2]/button[2]").click
-    sleep 2
+    @driver.find_element(:xpath, "(//*[@class='modal-footer']//button)[2]").click
+    sleep 1
   end
 
   Then(/^I assign the page "(.*?)" to the last navigation position$/) do |page_name|
