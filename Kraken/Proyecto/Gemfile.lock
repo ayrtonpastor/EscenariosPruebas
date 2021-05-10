@@ -59,6 +59,7 @@ GEM
     escape (0.0.4)
     faker (2.10.0)
       i18n (>= 1.6, < 1.8)
+    ffi (1.15.0)
     ffi (1.15.0-x64-mingw32)
     gherkin (5.1.0)
     httpclient (2.8.3)
