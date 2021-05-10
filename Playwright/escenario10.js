@@ -55,6 +55,10 @@ exports.escenario10 = async(url, browser, scenarioTag, correctEmail, correctPass
     // verifica si el post fue publicado correctamente
     await po.verificarPostProgramado(page, postTitle)
 
+    // restauración
+    await po.navegarA(page, navSubRoute)
+    await po.eliminarPost(page, postTitle)
+
     //cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
     console.log('Escenario 10: Finalizado')

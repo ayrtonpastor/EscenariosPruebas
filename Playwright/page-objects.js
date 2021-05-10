@@ -64,11 +64,11 @@ exports.navegarA = async(page, ruta) => {
 
 exports.cerrarSesion = async(page, nombreUsuario) => {
     page = page[0]
+    await page.reload()
     const elem = await page.waitForSelector(`span[title="${nombreUsuario}"]`)
     await elem.click()
     const elem2 = await page.waitForSelector('a[href="#/signout/"]')
     await elem2.click()
-
 }
 
 exports.tomarCaptura = async(page, esc) => {
@@ -173,7 +173,7 @@ exports.asignarPageANavBar = async(page, pageTitle) => {
     page = page[0];
     await page.type(`xpath=/html/body/div[2]/div/main/section/section/div[2]/form/div[2]/div/span[1]/input`, `${pageTitle}`);
     await page.keyboard.press('Tab');
-    await page.keyboard.type(`${trimLowerAndAddMinus(pageTitle)}`);
+    await page.keyboard.type(`${pageTitle.replace(/ /g, "-").toLowerCase().trim()}`);
 }
 
 exports.clicEn = async(page, textElement) => {
@@ -206,7 +206,7 @@ exports.filtrarYEditarTag = async(page, tagName, tagStatus) => {
     } else {
         await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
     }
-    await page.click(`a[href="#/tags/${(tagStatus === 'private' ? 'hash-' : '')+trimLowerAndAddMinus(tagName)}/"]`);
+    await page.click(`a[href="#/tags/${(tagStatus === 'private' ? 'hash-' : '')+tagName.replace(/ /g, "-").toLowerCase().trim()}/"]`);
 }
 
 exports.eliminarTag = async(page) => {
@@ -291,8 +291,4 @@ exports.verificarPostProgramado = async(page, tituloPost) => {
     const divPost = await postTitle.$('xpath=../..')
     const badgeStatus = await divPost.$('span.gh-content-status-draft')
     expect(await badgeStatus.innerText()).toBe('SCHEDULED')
-}
-
-const trimLowerAndAddMinus = (s) => {
-    s.replace(/ /g, "-").toLowerCase().trim();
 }

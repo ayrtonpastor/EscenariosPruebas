@@ -11,34 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="kraken-mobile (v[path]) [path][gem]" type="rubylib">
-        <properties>
-          <option name="version" value="4" />
-        </properties>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/bin" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/lib" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/docs" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/reporter" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/calabash-android-features-skeleton" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/bin" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/lib" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/docs" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/reporter" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/calabash-android-features-skeleton" />
-        </SOURCES>
-        <excluded>
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/bin" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/docs" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/reporter" />
-          <root url="file://$MODULE_DIR$/Kraken/KrakenMobile-1.0.9/calabash-android-features-skeleton" />
-        </excluded>
-      </library>
-    </orderEntry>
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.17.2, ruby-2.6.2-p47) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="did_you_mean (v1.3.0, ruby-2.6.2-p47) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="executable-hooks (v1.6.0, ruby-2.6.2-p47) [gem]" level="application" />
