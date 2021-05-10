@@ -375,3 +375,26 @@ exports.verificarPostProgramado = async(page, tituloPost) => {
     const badgeStatus = await divPost.$('span.gh-content-status-draft')
     expect(await badgeStatus.innerText()).toBe('SCHEDULED')
 }
+exports.realizarCambioRol = async(page, newRol) => {
+    page = page[0]
+    const rolNewInput = await page.waitForSelector('span.gh-select')
+    await rolNewInput.click()
+    await this.esperar(1000)
+    const newSelectRol = await rolNewInput.$(`option:text("${newRol}")`);
+    this.esperar(1000)
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    const saveButt = await page.waitForSelector('button.gh-btn-blue')
+    await saveButt.click()
+    this.esperar(1000)
+}
+exports.verificarRolCorrecto = async(page,rol,user) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.apps-card-app-title:text("${user}")`)
+    const divPost = await postTitle.$('xpath=../../..')
+    const badgeStatus = await divPost.$('span.gh-badge')
+    expect(await badgeStatus.innerText()).toBe(`${rol}`)
+}
