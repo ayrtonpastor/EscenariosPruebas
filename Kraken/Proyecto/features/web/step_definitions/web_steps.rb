@@ -306,4 +306,35 @@ if ENV["ADB_DEVICE_ARG"].nil?
     inputTitle.send_keys(mockText)
   end
 
+  Then(/^I go to config user "(.*)"$/)do |title|
+    sleep 1
+    postTitle=@driver.find_element(:xpath,'//h3[text()="'+title+'"][1]')
+    postTitle.find_element(:xpath,'../..').click()
+
+  end
+
+  Then(/^I close popup$/)do
+    sleep 1
+    @driver.find_element(:xpath, "//button[@class='gh-notification-close']").click()
+    sleep 1
+
+  end
+
+  Then(/^I close session$/) do
+    sleep 1
+    @driver.find_element(:xpath, "//span[@class='gh-user-email']").click()
+    sleep 2
+    @driver.find_element(:css, "[href='#/signout/']").click()
+  end
+
+  Then(/^I verify the existance of post scheduled with title "(.*)"$/)do |postTitle|
+    sleep 1
+    postTitle=@driver.find_element(:xpath,'//h3[text()="'+postTitle+'"][1]')
+    divPost = postTitle.find_element(:xpath,'../..')
+    badgeStatus = divPost.find_element(:css,'span.gh-content-status-draft')
+    if(badgeStatus.text != "SCHEDULED")
+      raise "El post no se encuentra en estado publicado"    
+    end
+  end
+
 end
