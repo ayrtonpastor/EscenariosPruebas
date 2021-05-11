@@ -2,7 +2,7 @@ Feature: realizar login fallido y correcto luego cerrar sesion
 
   @user1 @web
   Scenario: Como usuario quiero realizar login fallido y correcto luego cerrar sesion.
-    Given I navigate to page "http://localhost:2369/ghost/"
+    Given I navigate to page "http://localhost:2368/ghost"
     And I enter "asdfasdf3@example.com" into input field having css selector "[name='identification']"
     And I enter "adfagadfgdfs" into input field having css selector "[name='password']"
     And I click on element having css selector ".login"

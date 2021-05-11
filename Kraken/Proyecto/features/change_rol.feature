@@ -2,7 +2,7 @@ Feature: Cambiar rol de usuario Ghost
 
   @user1 @web
   Scenario: Como usuario quiero cambiar el rol del usuario Ghost
-    Given I navigate to page "http://localhost:2369/ghost/"
+    Given I navigate to page "http://localhost:2368/ghost"
     Then I login with credentials
     Then I navigate to menu "staff/"
     Then I go to config user "Ghost"
