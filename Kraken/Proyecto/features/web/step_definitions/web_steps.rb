@@ -337,4 +337,16 @@ if ENV["ADB_DEVICE_ARG"].nil?
     end
   end
 
+  Then(/^I change rol for Ghost user$/) do
+
+    sleep 1
+    @driver.find_element(:xpath, "//span[@class='gh-select']").click()
+    sleep 2
+    @driver.action.send_keys("Up".downcase.to_sym).perform
+    @driver.action.send_keys("Up".downcase.to_sym).perform
+    @driver.action.send_keys("Up".downcase.to_sym).perform
+    @driver.action.send_keys("Down".downcase.to_sym).perform
+    @driver.action.send_keys("Enter".downcase.to_sym).perform
+  end
+
 end
