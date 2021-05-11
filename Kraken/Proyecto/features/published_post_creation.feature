@@ -2,7 +2,7 @@ Feature: Shared board connection
 
   @user1 @web
   Scenario: Assign a page to a nav-bar
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page "http://localhost:2369/ghost"
     When I login with credentials
     And I click on element having css selector "[href='#/pages/']"
     And I click on element having css selector "[href='#/editor/page/']"

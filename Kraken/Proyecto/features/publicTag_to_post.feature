@@ -2,7 +2,7 @@ Feature: Shared board connection
 
   @user1 @web
   Scenario: Assign a public tag to a post
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page "http://localhost:2369/ghost"
     When I login with credentials
     And I click on element having css selector "[href='#/tags/']"
     And I click on element having css selector "[href='#/tags/new/']"
@@ -13,7 +13,7 @@ Feature: Shared board connection
     And I enter "Publicación para etiquetar" into input field having css selector "[placeholder='Post Title']"
     And I press the key "Tab"
     And I type this "Descripción de publicación para etiquetar"
-    And I tag the "post" with the recently created "private" tag, named "TestTag"
+    And I tag the "post" with the recently created "public" tag, named "TestTag"
     And I save as published "post"
     And I click on element having css selector "[href='#/posts/']"
     And I filter by tags and I click on the tag "TestTag", the recently created "public" tag
