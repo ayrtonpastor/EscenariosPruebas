@@ -296,13 +296,13 @@ exports.eliminarTag = async(page) => {
     page = page[0];
     await page.reload();
     await page.click(`xpath=//html/body/div[2]/div/main/section/button`);
-    await page.click(`xpath=//html/body/div[4]/div[2]/div/div/div/div[2]/section/div[2]/button[2]`);
+    await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`);
 }
 
 exports.validarEliminacionDeTag = async(page, tagName, tagStatus) => {
     page = page[0];
     if (tagStatus === 'private') {
-        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[2]`);
+        await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`);
     } else {
         await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
     }
@@ -351,7 +351,7 @@ exports.realizarCambioPassword = async(page, newPass, password) => {
     await page.click(`css=${passNewValidInput}`)
     await page.click('button.button-change-password')
     await this.esperar(1000)
-
+    await page.click('button.gh-notification-close')
 }
 exports.publicarPostHora = async(page) => {
     page = page[0];
@@ -374,4 +374,27 @@ exports.verificarPostProgramado = async(page, tituloPost) => {
     const divPost = await postTitle.$('xpath=../..')
     const badgeStatus = await divPost.$('span.gh-content-status-draft')
     expect(await badgeStatus.innerText()).toBe('SCHEDULED')
+}
+exports.realizarCambioRol = async(page, newRol) => {
+    page = page[0]
+    const rolNewInput = await page.waitForSelector('span.gh-select')
+    await rolNewInput.click()
+    await this.esperar(1000)
+    const newSelectRol = await rolNewInput.$(`option:text("${newRol}")`);
+    this.esperar(1000)
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowUp');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Enter');
+    const saveButt = await page.waitForSelector('button.gh-btn-blue')
+    await saveButt.click()
+    this.esperar(1000)
+}
+exports.verificarRolCorrecto = async(page,rol,user) => {
+    page = page[0]
+    const postTitle = await page.waitForSelector(`.apps-card-app-title:text("${user}")`)
+    const divPost = await postTitle.$('xpath=../../..')
+    const badgeStatus = await divPost.$('span.gh-badge')
+    expect(await badgeStatus.innerText()).toBe(`${rol}`)
 }

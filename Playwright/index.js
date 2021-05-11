@@ -11,6 +11,7 @@ const e10 = require('./escenario10')
 const e11 = require('./escenario11');
 const e12 = require('./escenario12')
 const e13 = require('./escenario13');
+const e14 = require('./escenario14');
 const e15 = require('./escenario15');
 const e16 = require('./escenario16')
 const e17 = require('./escenario17');
@@ -19,7 +20,7 @@ const e19 = require('./escenario19');
 const e20 = require('./escenario20');
 
 const url = 'http://localhost:2368/ghost/';
-const administratorName = 'Ayrton Pastor C.';
+const administratorName = 'Pedro';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
 
@@ -289,7 +290,26 @@ const administratorPassword = 'administrador123';
         'ghost1',
         'Ghost'
     );
+    //Escenario 14 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param newRol: nombre del nuevo rol a cambiar
 
+    await e14.escenario14(
+        url,
+        'chromium',
+        'e14',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff',
+        'EDITOR'
+    );
     await e15.escenario15(
         url,
         'chromium',
