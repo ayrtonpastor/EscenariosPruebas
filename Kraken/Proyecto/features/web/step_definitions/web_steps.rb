@@ -2,7 +2,7 @@ if ENV["ADB_DEVICE_ARG"].nil?
   
   $username = "administrador123@example.com"
   $password = "administrador123"
-  $profile_name = "Pedro"
+  $profile_name = "Ayrton Pastor C."
 
   require 'kraken-mobile/steps/web/kraken_steps'
 

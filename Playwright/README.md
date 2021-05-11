@@ -15,7 +15,7 @@ Instalar la version de Ghost deseada en una carpeta vacia:
 
 Al ingresar al panel de admin: ```'http://localhost:2368/ghost/'``` ponga los siguientes datos al registrarse como admin:
 ```
-Nombre de administrador: Pedro
+Nombre de administrador: Ayrton Pastor C.
 Email de admin: administrador123@example.com
 Contraseña de admin: administrador123
 ```
@@ -31,7 +31,7 @@ Asegurese de estar en la ruta ```<Path-al-proyecto>\Playwright``` y ejecute
 Vaya al archivo  ```index.js``` y configure las siguientes variables a su acomodo tal como las configuró en el Ghost, este es un ejemplo:
 ```
 const url = 'http://localhost:2368/ghost/';
-const administratorName = 'Pedro';
+const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
 ```
