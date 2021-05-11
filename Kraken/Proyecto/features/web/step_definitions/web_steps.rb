@@ -200,4 +200,99 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.find_element(:xpath, "//a/h3[text()='#{post_name}'][1]").click
     sleep 2
   end
+
+  Then("I should see error") do 
+    error_element = @driver.find_element(:class_name,"main-error")
+    puts(error_element.text)
+    if (error_element.text.strip == "")
+      raise "El valor mostrado del error es distinto al de por parametro"
+    end
+  end
+
+  Then (/^I clear inputs with css selectors "(.*)" and "(.*)"$/)do |emailInput, passInput|
+    @driver.find_element(:css,emailInput).clear()
+    @driver.find_element(:css,passInput).clear()
+    
+  end
+
+  
+  Then (/^I verify is logged with the username: "(.*)"$/)do |username|
+    userCard = @driver.find_element(:css,'span[title="'+username+'"]')
+    if(userCard.text != username)
+      raise "El nombre de usuario es incorrecto"
+    end
+  end
+
+  Then(/^I logout from ghost of "(.*)"$/)do |username|
+    @driver.find_element(:css,'span[title="'+username+'"]').click()
+    sleep 1
+    @driver.find_element(:css,'a[href="#/signout/"]').click()
+  end
+  
+  Then(/^I verify the existance of post with title "(.*)"$/)do |postTitle|
+    sleep 1
+    postTitle=@driver.find_element(:xpath,'//h3[text()="'+postTitle+'"][1]')
+
+    divPost = postTitle.find_element(:xpath,'../..')
+    badgeStatus = divPost.find_element(:css,'span.gh-content-status-published')
+    if(badgeStatus.text != "PUBLISHED")
+      
+        raise "El post no se encuentra en estado publicado"
+      
+    end
+
+  end
+  Then(/^I delete the new post with title: "(.*)"$/)do |postTitle|
+    sleep 1
+    postTitle=@driver.find_element(:xpath,'//h3[text()="'+postTitle+'"][1]')
+
+    postTitle.find_element(:xpath,'../..').click()
+    sleep 1
+    @driver.find_element(:css, 'button[title="Settings"]').click()
+    sleep 1
+    @driver.find_element(:css,'.settings-menu-delete-button').click()
+    sleep 1
+    modal = @driver.find_element(:css,'section.modal-content')
+    modal.find_element(:css,'.gh-btn-red').click()
+  end
+
+  Then(/^I open "(.*)" staff match info$/) do |nameStaff|
+    File.write('oldNameStaff',nameStaff)
+    variable = @driver.find_element(:xpath,'//h3[text()="'+nameStaff+'"]')
+    variable.find_element(:xpath,'../..').click()
+  end
+
+  Then (/^I clear input with css selector "(.*)"$/)do |nameInput|
+    @driver.find_element(:css,nameInput).clear()
+  end
+
+  Then (/^I verify changed name "(.*)"$/)do |nameStaff|
+    @driver.find_element(:xpath,'//h3[text()="'+nameStaff+'"]')
+  end
+
+  Then(/^I put old name back in the input who contains "(.*)" with css "(.*)"$/)do |newName, selector|
+    oldName = IO.read('oldNameStaff')
+    staffName=@driver.find_element(:xpath,'//h3[text()="'+newName+'"][1]')
+    staffName.find_element(:xpath,'../..').click()
+    @driver.find_element(:css,selector)
+    inputName = @driver.find_element(:css,selector)
+    inputName.clear()
+    inputName.send_keys(oldName)
+  end
+  
+  Then(/^I open "(.*)" page match info$/) do |namePage|
+    variable = @driver.find_element(:xpath,'//h3[text()="'+namePage+'"]')
+    variable.find_element(:xpath,'../..').click()
+  end
+
+  Then(/^I enter a text with "(.*)" chars into input field having css selector "(.*)"$/) do |numberChar,selector|
+    inputTitle = @driver.find_element(:css,selector)
+    inputTitle.clear()
+    mockText = ""
+    for i in 0..numberChar.to_i
+      mockText = mockText+"x"
+    end
+    inputTitle.send_keys(mockText)
+  end
+
 end
