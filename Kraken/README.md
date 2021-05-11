@@ -42,3 +42,6 @@ Estos datos SON OBLIGATORIOS o NO funcionaran los casos
 
 ## 4. Ejecutar las pruebas
 Ubiquese en ```Kraken/Proyecto``` Ejecute las pruebas con el comando ```bundle exec kraken-mobile run```
+
+
+**NOTA:** En caso de dudas, dirijase a la documentación en ```Kraken/KrakenMobile-1.0.9/```
