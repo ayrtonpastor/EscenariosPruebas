@@ -27,7 +27,7 @@ const administratorPassword = 'administrador123';
 //Función flecha asíncrona
 (async() => {
     /*
-    
+    */
     
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -321,7 +321,7 @@ const administratorPassword = 'administrador123';
         'posts',
         'Post Con Imagen'
     )
-    */
+    
     // Scene 16's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
