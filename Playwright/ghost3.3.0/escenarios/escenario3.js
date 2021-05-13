@@ -1,7 +1,6 @@
-const po = require('./page-objects')
-exports.escenario7 = async(url, browser, scenarioTag, email, pass, navSubRoute,
-    pageTitle) => {
-
+const po = require('../page-objects')
+exports.escenario3 = async(url, browser, scenarioTag, email, pass, navSubRoute,
+    postTitle) => {
 
     console.log('Inicia escenario: ' + scenarioTag)
 
@@ -27,13 +26,13 @@ exports.escenario7 = async(url, browser, scenarioTag, email, pass, navSubRoute,
     await po.tomarCaptura(page, scenarioTag)
 
     //da click en el boton de crear nuevo post
-    await po.clickNuevoPage(page)
+    await po.clickNuevoPost(page)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     // escribe valores por parametro de titulo y texto en los input de editor de post
-    await po.escribirMockEnPost(page, pageTitle, "")
+    await po.escribirMockEnPost(page, postTitle, "")
 
     //...
     await po.tomarCaptura(page, scenarioTag)
@@ -44,18 +43,17 @@ exports.escenario7 = async(url, browser, scenarioTag, email, pass, navSubRoute,
     //...
     await po.tomarCaptura(page, scenarioTag)
 
-    await po.clickElementWithTile(page, pageTitle)
+    await po.clickElementWithTile(page, postTitle)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     await po.deleteCurrentDraft(page)
 
-    await po.navegarA(page, navSubRoute)
-
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     //... cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
+
 }

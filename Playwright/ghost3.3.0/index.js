@@ -1,33 +1,34 @@
-const e1 = require('./escenario1')
-const e2 = require('./escenario2')
-const e3 = require('./escenario3');
-const e4 = require('./escenario4')
-const e5 = require('./escenario5')
-const e6 = require('./escenario6')
-const e7 = require('./escenario7');
-const e8 = require('./escenario8')
-const e9 = require('./escenario9')
-const e10 = require('./escenario10')
-const e11 = require('./escenario11');
-const e12 = require('./escenario12')
-const e13 = require('./escenario13');
-const e14 = require('./escenario14');
-const e15 = require('./escenario15');
-const e16 = require('./escenario16')
-const e17 = require('./escenario17');
-const e18 = require('./escenario18')
-const e19 = require('./escenario19');
-const e20 = require('./escenario20');
+const e1 = require('./escenarios/escenario1')
+const e2 = require('./escenarios/escenario2')
+const e3 = require('./escenarios/escenario3');
+const e4 = require('./escenarios/escenario4')
+const e5 = require('./escenarios/escenario5')
+const e6 = require('./escenarios/escenario6')
+const e7 = require('./escenarios/escenario7');
+const e8 = require('./escenarios/escenario8')
+const e9 = require('./escenarios/escenario9')
+const e10 = require('./escenarios/escenario10')
+const e11 = require('./escenarios/escenario11');
+const e12 = require('./escenarios/escenario12')
+const e13 = require('./escenarios/escenario13');
+const e14 = require('./escenarios/escenario14');
+const e15 = require('./escenarios/escenario15');
+const e16 = require('./escenarios/escenario16')
+const e17 = require('./escenarios/escenario17');
+const e18 = require('./escenarios/escenario18')
+const e19 = require('./escenarios/escenario19');
+const e20 = require('./escenarios/escenario20');
 
 const url = 'http://localhost:2368/ghost/';
-const administratorName = 'Pedro';
+const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
 
 //Función flecha asíncrona
 (async() => {
     /*
-     */
+    */
+     
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -165,6 +166,7 @@ const administratorPassword = 'administrador123';
         'e7',
         administratorEmail,
         administratorPassword,
+        administratorName,
         'pages',
         "Nueva Pagina"
     );

@@ -1,4 +1,4 @@
-const po = require('./page-objects')
+const po = require('../page-objects')
 exports.escenario18 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, postTitle, textPost, tagName, tagStatus) => {
 
     console.log('Escenario 18: Crear etiqueta y asignarla a post')

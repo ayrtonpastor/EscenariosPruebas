@@ -1,6 +1,5 @@
-const po = require('./page-objects')
-exports.escenario11 = async(url, browser, scenarioTag, email, pass, navSubRoute,
-    postTitle, old_owner, new_owner) => {
+const po = require('../page-objects')
+exports.escenario15 = async(url, browser, scenarioTag, email, pass, navSubRoute, postTitle) => {
 
     console.log('Inicia escenario: ' + scenarioTag)
 
@@ -33,21 +32,14 @@ exports.escenario11 = async(url, browser, scenarioTag, email, pass, navSubRoute,
 
     // escribe valores por parametro de titulo y texto en los input de editor de post
     await po.escribirMockEnPost(page, postTitle, "")
+        //...
+    await po.tomarCaptura(page, scenarioTag)
 
-    //...
+    await po.enterImageContentToPost(page)
+
     await po.tomarCaptura(page, scenarioTag)
 
     await po.performActionOnElement(page, "Publish", "Post")
-
-    //...
-    await po.tomarCaptura(page, scenarioTag)
-
-    await po.changePostOwner(page, old_owner, new_owner)
-
-    //...
-    await po.tomarCaptura(page, scenarioTag)
-
-    await po.performActionOnElement(page, "Update", "Post")
 
     //...
     await po.tomarCaptura(page, scenarioTag)
@@ -61,7 +53,5 @@ exports.escenario11 = async(url, browser, scenarioTag, email, pass, navSubRoute,
 
     //... cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
-
-
 
 }

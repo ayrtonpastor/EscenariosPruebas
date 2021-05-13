@@ -1,4 +1,4 @@
-const po = require('./page-objects')
+const po = require('../page-objects')
 exports.escenario17 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost, longPostTitle) => {
 
     console.log('Inicia escenario: ' + scenarioTag)

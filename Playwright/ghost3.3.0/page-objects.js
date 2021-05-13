@@ -40,7 +40,7 @@ exports.clickBotonLogin = async(page) => {
 
 exports.verificarErrorLogin = async(page) => {
     page = page[0]
-    await this.esperar(1000)
+    await this.esperar(2000)
     elem = await page.$('.main-error')
     expect(await elem.innerHTML()).not.toBe('&nbsp;')
 
@@ -75,7 +75,7 @@ exports.tomarCaptura = async(page, esc) => {
     numeroCaptura += 1
     await this.esperar(1000)
     page = page[0]
-    await page.screenshot({ path: `./${esc}/${esc}-${numeroCaptura}.png` })
+    await page.screenshot({ path: `./screenshots/${esc}/${esc}-${numeroCaptura}.png` })
 }
 
 exports.clickNuevoPost = async(page) => {
@@ -381,7 +381,7 @@ exports.realizarCambioRol = async(page, newRol) => {
     await rolNewInput.click()
     await this.esperar(1000)
     const newSelectRol = await rolNewInput.$(`option:text("${newRol}")`);
-    this.esperar(1000)
+    await this.esperar(1000)
     await page.keyboard.press('ArrowUp');
     await page.keyboard.press('ArrowUp');
     await page.keyboard.press('ArrowUp');
@@ -389,10 +389,11 @@ exports.realizarCambioRol = async(page, newRol) => {
     await page.keyboard.press('Enter');
     const saveButt = await page.waitForSelector('button.gh-btn-blue')
     await saveButt.click()
-    this.esperar(1000)
+    await this.esperar(1000)
 }
 exports.verificarRolCorrecto = async(page,rol,user) => {
     page = page[0]
+    await this.esperar(1000)
     const postTitle = await page.waitForSelector(`.apps-card-app-title:text("${user}")`)
     const divPost = await postTitle.$('xpath=../../..')
     const badgeStatus = await divPost.$('span.gh-badge')

@@ -1,4 +1,4 @@
-const po = require('./page-objects')
+const po = require('../page-objects')
 exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, ghostEmail, newPass) => {
 
     console.log('Escenario 2: Cambiar contrasena usuario Ghost')

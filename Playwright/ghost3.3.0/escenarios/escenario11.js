@@ -1,6 +1,6 @@
-const po = require('./page-objects')
-exports.escenario3 = async(url, browser, scenarioTag, email, pass, navSubRoute,
-    postTitle) => {
+const po = require('../page-objects')
+exports.escenario11 = async(url, browser, scenarioTag, email, pass, navSubRoute,
+    postTitle, old_owner, new_owner) => {
 
     console.log('Inicia escenario: ' + scenarioTag)
 
@@ -37,23 +37,31 @@ exports.escenario3 = async(url, browser, scenarioTag, email, pass, navSubRoute,
     //...
     await po.tomarCaptura(page, scenarioTag)
 
-    //...
-    await po.guardarDraft(page, navSubRoute + '/')
+    await po.performActionOnElement(page, "Publish", "Post")
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
-    await po.clickElementWithTile(page, postTitle)
+    await po.changePostOwner(page, old_owner, new_owner)
+
+    //...
+    await po.tomarCaptura(page, scenarioTag)
+
+    await po.performActionOnElement(page, "Update", "Post")
 
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     await po.deleteCurrentDraft(page)
 
+    await po.navegarA(page, navSubRoute)
+
     //...
     await po.tomarCaptura(page, scenarioTag)
 
     //... cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
+
+
 
 }

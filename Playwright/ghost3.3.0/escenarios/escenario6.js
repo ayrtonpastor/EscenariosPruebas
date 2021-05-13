@@ -1,8 +1,7 @@
-const po = require('./page-objects')
-exports.escenario4 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost) => {
+const po = require('../page-objects')
+exports.escenario6 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost) => {
 
-    console.log('Inicia escenario: ' + scenarioTag)
-
+    console.log('Escenario 6: Crear post y editar la hora de publicacion')
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
 
@@ -18,8 +17,9 @@ exports.escenario4 = async(url, browser, scenarioTag, correctEmail, correctPass,
     //da click en el boton de Login
     await po.clickBotonLogin(page)
 
+
     //verifica que el login se haga correctamente y que se visualice la pagina principal de ghost
-    await po.verificarLoginCorrecto(page, loggedUserName)
+    await po.verificarLoginUsuarioCorrecto(page,loggedUserName)
 
     //...
     await po.tomarCaptura(page, scenarioTag)
@@ -43,8 +43,9 @@ exports.escenario4 = async(url, browser, scenarioTag, correctEmail, correctPass,
     await po.tomarCaptura(page, scenarioTag)
 
     // publica el post
-    await po.publicarPost(page);
-
+    await po.publicarPostHora(page);
+    //...
+    await po.tomarCaptura(page, scenarioTag)
     //...
     await po.navegarA(page, navSubRoute)
 
@@ -52,14 +53,13 @@ exports.escenario4 = async(url, browser, scenarioTag, correctEmail, correctPass,
     await po.tomarCaptura(page, scenarioTag)
 
     // verifica si el post fue publicado correctamente
-    await po.verificarPostPublicado(page, postTitle)
+    await po.verificarPostProgramado(page, postTitle)
 
-    //Elimina el post cuyo titulo entra por parametro
-    await po.eliminarPost(page, postTitle)
-
-    //...
+    // restauración
     await po.navegarA(page, navSubRoute)
+    await po.eliminarPost(page, postTitle)
 
     //cierra el navegador y termina la prueba
     await po.cerrarNavegador(page)
+    console.log('Escenario 6: Finalizado')
 }
