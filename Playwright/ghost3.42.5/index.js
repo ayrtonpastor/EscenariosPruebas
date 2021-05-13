@@ -29,6 +29,7 @@ const administratorPassword = 'administrador123';
     /*
     */
     
+    
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -237,6 +238,7 @@ const administratorPassword = 'administrador123';
         'texto de prueba de la pagina'
     );
 
+    
     await e11.escenario11(
         url,
         'chromium',
