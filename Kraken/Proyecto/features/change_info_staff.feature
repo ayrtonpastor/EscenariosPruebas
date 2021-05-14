@@ -1,7 +1,7 @@
 Feature: realizar publish de una pagina y eliminarlo
 
   @user1 @web
-  Scenario: Como usuario quiero crear una pagina, publicarla, verificar su existencia y luego eliminarla.
+  Scenario: e13, Como usuario quiero acceder al usuario ghost y cambiar su nombre
     Given I navigate to page "http://localhost:2368/ghost"
     And I enter "administrador123@example.com" into input field having css selector "[name='identification']"
     And I enter "administrador123" into input field having css selector "[name='password']"

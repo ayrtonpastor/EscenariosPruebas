@@ -1,7 +1,7 @@
 Feature: Shared board connection
 
   @user1 @web
-  Scenario: Delete a tag
+  Scenario: e20, Delete a tag
     Given I navigate to page "http://localhost:2368/ghost"
     When I login with credentials
     And I click on element having css selector "[href='#/tags/']"
