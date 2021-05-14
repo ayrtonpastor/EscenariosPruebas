@@ -1,7 +1,10 @@
 const { exec } = require('child_process');
 const fs = require('fs');
+//Se carga los escenarios requeridos junto con el numero de screenshots a revisar
 const escenarios = [['e2',7],['e4',6]];
 
+//@param version: relaciona la version de ghost a tomar como referencia
+//@param fileName: nombre del archivo .json a generar
 function generateJson(version,fileName) {
     let inicio = `{
         "id": "backstopVRT",
