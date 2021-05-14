@@ -190,7 +190,7 @@ if ENV["ADB_DEVICE_ARG"].nil?
   Then(/^I tag the "(.*?)" with the recently created "(.*?)" tag, named "(.*?)"$/) do |object_to_tag, tag_status, tag_name|
     @driver.find_element(:xpath, "//html/body/div[2]/div/main/section/header/section/button").click
     sleep 2
-    @driver.find_element(:xpath, "//html/body/div[4]/div[1]/div/div/div/div/div[1]/div/div[1]/div[2]/form/div[3]/div/div/div/div[1]/ul/input")
+    @driver.find_element(:xpath, "//div[label[@for='tag-input']]//ul/input")
            .send_keys((tag_status == 'private' ? '#' : '')+tag_name.strip)
     sleep 2
     @driver.action.send_keys(:tab).perform
