@@ -130,13 +130,13 @@ exports.changePostOwner = async(page, old_owner, new_owner) => {
     await page.click(`xpath=//button[@class='post-settings']`)
     await this.esperar(1000)
     await page.click(`xpath=//div[label[text()='Authors']]//div[@role='button']`)
-    await this.esperar(1000)
+    await page.keyboard.press('Backspace')
     await page.click(`xpath=//ul[@role='listbox']//li[@role='option' and text()='${new_owner}']`)
     await this.esperar(1000)
-    const pedroEl = await page.waitForSelector(`xpath=//*[@class='settings-menu-container']//li[text()='${old_owner}']`)
-    const button = await pedroEl.waitForSelector(`xpath=//span[@role='button'][1]`)
-    await button.click();
-    await this.esperar(2000)
+}    
+
+exports.changePostOwnerClose = async(page, old_owner, new_owner) => {
+    page = page[0];
     await page.click(`xpath=//button[@class='close settings-menu-header-action']`)
     await this.esperar(1000)
 }
