@@ -1,7 +1,7 @@
 Feature: Shared board connection
 
   @user1 @web
-  Scenario: Assign a public tag to a post
+  Scenario: e18, Assign a public tag to a post
     Given I navigate to page "http://localhost:2368/ghost"
     When I login with credentials
     And I click on element having css selector "[href='#/tags/']"

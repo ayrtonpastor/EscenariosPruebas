@@ -1,7 +1,7 @@
 Feature: realizar publish de un post y eliminarlo
 
   @user1 @web
-  Scenario: Como usuario quiero crear un post, publicarlo, verificar su existencia y luego eliminarlo.
+  Scenario: e5, Como usuario quiero crear un post, publicarlo, verificar su existencia y luego eliminarlo.
     Given I navigate to page "http://localhost:2368/ghost"
     And I enter "administrador123@example.com" into input field having css selector "[name='identification']"
     And I enter "administrador123" into input field having css selector "[name='password']"

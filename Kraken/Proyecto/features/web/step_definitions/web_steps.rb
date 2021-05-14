@@ -3,6 +3,9 @@ if ENV["ADB_DEVICE_ARG"].nil?
   $username = "administrador123@example.com"
   $password = "administrador123"
   $profile_name = "Ayrton Pastor C."
+  $numberStep = 1
+  $scenario  = ""
+
 
   require 'kraken-mobile/steps/web/kraken_steps'
 
@@ -347,6 +350,39 @@ if ENV["ADB_DEVICE_ARG"].nil?
     @driver.action.send_keys("Up".downcase.to_sym).perform
     @driver.action.send_keys("Down".downcase.to_sym).perform
     @driver.action.send_keys("Enter".downcase.to_sym).perform
+  end
+
+  # Hooks
+  AfterStep do |_scenario|
+    ghostVersion = IO.read('ghostVersion')
+    path="./screenshots/#{ghostVersion}/#{$scenario}/#{$numberStep}.png"
+    @driver.save_screenshot(path)
+    embed(path, 'image/png', File.basename(path))
+    $numberStep = $numberStep.to_i + 1
+  end
+
+  Before do |scenario|
+    numberScenario = scenario.name
+    $scenario =  numberScenario.split(",")
+    $scenario = $scenario[0]
+    ghostVersion = IO.read('ghostVersion').to_s
+    firstPath = "./screenshots"
+    secondPath = "#{firstPath}/#{ghostVersion}"
+    thirdPath = "#{secondPath}/#{$scenario}"
+    if (!File.exist?(firstPath))
+      Dir.mkdir(firstPath)
+    end
+
+    if(!File.exist?(secondPath))
+        Dir.mkdir(secondPath)
+    end
+
+    if (File.exist?(thirdPath))
+      FileUtils.rm_rf("#{thirdPath}")
+    end
+      Dir.mkdir(thirdPath)
+
+    
   end
 
 end

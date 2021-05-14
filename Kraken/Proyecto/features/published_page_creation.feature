@@ -1,7 +1,7 @@
 Feature: Shared board connection
 
   @user1 @web
-  Scenario: Create a published page
+  Scenario: e8, Create a published page
     Given I navigate to page "http://localhost:2368/ghost"
     When I login with credentials
     And I click on element having css selector "[href='#/pages/']"
