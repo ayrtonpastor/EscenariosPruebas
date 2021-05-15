@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Reporte</title>
+</head>
+
+<body>
+    <h1 class="text-center">
+        Reporte VRT
+    </h1>
+    <main class="container-fluid">
+        <% if (escenarios) { %>
+            <% for( let escenario of escenarios) { %>
+                <div class="container bg-light p-5">
+                    <h2 class="text-center bg-dark text-light p-3">Escenario: <%= escenario.name %> </h2>
+                    <% for( let step of escenario.pasos) {%>
+                        <h3 class="row bg-dark text-light p-3">
+                            Paso: <%= step.name %>, misMatchPercentage: <%= step.diff_data.misMatchPercentage %>%
+                        </h3>
+                        <div class="row">
+                            <div class="col">
+                                <p class="fs-3">
+                                    Ghost V3.3.0:
+                                </p>
+                                <img class="img-fluid" src="<%= step.first_img_path %>" alt="">
+                            </div>
+                            <div class="col">
+                                <p class="fs-3">
+                                    Ghost V3.42.5:
+                                </p>
+                                <img class="img-fluid" src="<%= step.second_img_path %>" alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="fs-3">
+                                Diferencia:
+                            </p>
+                            <div class="col">
+                                <img class="img-fluid" src="<%= step.diff_img_path %>" alt="">
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+
+        <% } else { %>
+            <h2 class="text-center">
+                No Existen Escenarios para mostrar
+            </h2>
+        <% } %>
+                    
+    </main>
+</body>
+
+</html>
