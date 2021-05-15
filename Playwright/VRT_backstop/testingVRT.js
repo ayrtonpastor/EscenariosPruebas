@@ -100,7 +100,11 @@ const pathImagesArray = "../ghost3.3.0/screenshots";
     generateScenarioArray = async(path) => {
         folders = fs.readdirSync(path);
         newElemArray = [];
-        await folders.forEach(folder => newElemArray.push([folder, fs.readdirSync(`${path}/${folder}`).length]));
+        await folders.forEach(function(folder) {
+            if(['e1','e2','e3','e11','e12','e13','e14','e16','e17','e18','e19'].includes(folder)){
+                newElemArray.push([folder, fs.readdirSync(`${path}/${folder}`).length])
+            }
+        });
         escenarios = await newElemArray
         console.log(await escenarios)
     }

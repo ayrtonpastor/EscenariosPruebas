@@ -19,7 +19,7 @@ const e18 = require('./escenarios/escenario18')
 const e19 = require('./escenarios/escenario19');
 const e20 = require('./escenarios/escenario20');
 
-const url = 'http://localhost:2369/ghost/';
+const url = 'http://localhost:2368/ghost/';
 const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
