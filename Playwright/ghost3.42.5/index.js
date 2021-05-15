@@ -19,7 +19,7 @@ const e18 = require('./escenarios/escenario18')
 const e19 = require('./escenarios/escenario19');
 const e20 = require('./escenarios/escenario20');
 
-const url = 'http://localhost:3425/ghost/';
+const url = 'http://localhost:2369/ghost/';
 const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
@@ -27,9 +27,9 @@ const administratorPassword = 'administrador123';
 //Función flecha asíncrona
 (async() => {
     /*
-    */
-    
-    
+     */
+
+
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -238,7 +238,7 @@ const administratorPassword = 'administrador123';
         'texto de prueba de la pagina'
     );
 
-    
+
     await e11.escenario11(
         url,
         'chromium',
@@ -323,7 +323,7 @@ const administratorPassword = 'administrador123';
         'posts',
         'Post Con Imagen'
     )
-    
+
     // Scene 16's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
@@ -345,7 +345,7 @@ const administratorPassword = 'administrador123';
         'TagPrivado',
         'private'
     );
-    
+
     //Escenario 17 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
