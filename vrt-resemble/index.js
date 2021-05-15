@@ -1,37 +1,31 @@
 const compareImages = require("resemblejs/compareImages");
 const fs = require("mz/fs");
 let ejs = require('ejs');
+var assert = require('assert');  
 
 
 const TEMPLATE_PATH = './template.ejs';
-const ESCENARIOS = ['e1'] 
+const ESCENARIOS = ['e1','e2'] 
 
-
-const data = {
-    'escenarios' : [
-        {
-            'name' : 'e1',
-            'pasos' : [
-                {}, {}
-            ]
-        },
-        {
-            'name' : 'e2',
-            'pasos' : [
-                {}, {}
-            ]
-        }
-    ]
-}
-
+const SC_GH$3_3_3$PATH = '../Playwright/ghost3.3.0/screenshots'
+const SC_GH$3_42_5$PATH = '../Playwright/ghost3.42.5/screenshots'
 const REPORT_DIR = './reporte'
 
-if (!fs.existsSync(REPORT_DIR)) {
-    fs.mkdirSync(REPORT_DIR);
+const create_dir = (path) => {
+    if (!fs.existsSync(path)){
+        fs.mkdirSync(path);
+    }
 }
 
-ejs.renderFile(TEMPLATE_PATH, data, (err, html) =>{
-    fs.writeFile(REPORT_DIR+"/reporte.html", html);
+create_dir(REPORT_DIR)
+create_dir(REPORT_DIR+'/diff')
+create_dir(REPORT_DIR+'/v3.3.0/')
+create_dir(REPORT_DIR+'/v3.42.5/')
+
+ESCENARIOS.forEach( escenario => {
+    create_dir(REPORT_DIR+'/diff/'+escenario);
+    create_dir(REPORT_DIR+'/v3.3.0/'+escenario);
+    create_dir(REPORT_DIR+'/v3.42.5/'+escenario);    
 })
 
 async function getDiff() {
@@ -52,17 +46,56 @@ async function getDiff() {
         ignore: "antialiasing"
     };
 
-    // The parameters can be Node Buffers
-    // data is the same as usual with an additional getBuffer() function
-    const data = await compareImages(
-        await fs.readFile("../Playwright/ghost3.3.0/screenshots/e1/e1-1.png"),
-        await fs.readFile("../Playwright/ghost3.42.5/screenshots/e1/e1-1.png"),
-        options
-    );
+    let ejs_data = {
+        "escenarios" : []
+    }
 
-    console.log(data);
+    for(let escenario of ESCENARIOS)
+    {
+        let ejs_escenario = {
+            "name": escenario,
+            "pasos": []
+        }
+        e_gh_v1 = fs.readdirSync(SC_GH$3_3_3$PATH+'/'+escenario)
+        e_gh_v2 = fs.readdirSync(SC_GH$3_42_5$PATH+'/'+escenario)
+        assert(e_gh_v1.length == e_gh_v2.length)
+        for(let i=0;i<e_gh_v1.length;++i)
+        {
+            const first_image_path = SC_GH$3_3_3$PATH+'/'+escenario+'/'+e_gh_v1[i];
+            const second_image_path = SC_GH$3_42_5$PATH+'/'+escenario+'/'+e_gh_v2[i];
+            
+            const result_path = REPORT_DIR+'/diff/'+escenario+'/'+e_gh_v1[i];
+            const v1_copy_path = REPORT_DIR+'/v3.3.0/'+ escenario + '/' + e_gh_v1[i]
+            const v2_copy_path = REPORT_DIR+'/v3.42.5/'+ escenario + '/' + e_gh_v2[i]
 
-    await fs.writeFile("./output.png", data.getBuffer());
+            assert(e_gh_v1[i] == e_gh_v2[i])
+            const image_1 = await fs.readFile(first_image_path)
+            const image_2 = await fs.readFile(second_image_path)
+            const data = await compareImages(
+                image_1,
+                image_2,
+                options
+            );
+            console.log(data);
+            await fs.writeFile(result_path, data.getBuffer());
+            await fs.writeFile(v1_copy_path, image_1);
+            await fs.writeFile(v2_copy_path, image_2);
+            let ejs_paso = {
+                "name" : e_gh_v2[i],
+                "first_img_path" :  './v3.3.0/'+ escenario + '/' + e_gh_v1[i],
+                "second_img_path" : './v3.42.5/'+ escenario + '/' + e_gh_v2[i],
+                "diff_img_path" : './diff/'+escenario+'/'+e_gh_v1[i]
+            }
+
+            ejs_escenario.pasos.push(ejs_paso)
+        }
+        ejs_data.escenarios.push(ejs_escenario)
+    }
+    return ejs_data
 }
 
-getDiff();
+getDiff().then( ejs_data => {
+    ejs.renderFile(TEMPLATE_PATH, ejs_data, (err, html) =>{
+        fs.writeFile(REPORT_DIR+"/reporte.html", html);
+    })
+});

@@ -18,20 +18,22 @@
         <% if (escenarios) { %>
             <% for( let escenario of escenarios) { %>
                 <div class="container">
-                    <h2 class="text-center"><% escenario.name %> </h2>
+                    <h2 class="text-center"><%= escenario.name %> </h2>
                     <% for( let step of escenario.pasos) {%>
                         <div class="row">
-                            <% step.number %>
+                            <%= step.name %>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <img src="" alt="">
+                                <img class="img-fluid" src="<%= step.first_img_path %>" alt="">
                             </div>
                             <div class="col">
-                                <img src="" alt="">
+                                <img class="img-fluid" src="<%= step.second_img_path %>" alt="">
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
-                                <img src="" alt="">
+                                <img class="img-fluid" src="<%= step.diff_img_path %>" alt="">
                             </div>
                         </div>
                     <% } %>
