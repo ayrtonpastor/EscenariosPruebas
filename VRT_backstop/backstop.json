@@ -13,7 +13,7 @@
     {
       "label": "e1-1",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": ".././ghost3.3.0/screenshots/e1/e1-1.png",
+      "url": "../Playwright/ghost3.3.0/screenshots/e1/e1-1.png",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
@@ -32,7 +32,7 @@
     {
       "label": "e1-2",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": ".././ghost3.3.0/screenshots/e1/e1-2.png",
+      "url": "../Playwright/ghost3.3.0/screenshots/e1/e1-2.png",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
@@ -51,7 +51,7 @@
     {
       "label": "e2-1",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": ".././ghost3.3.0/screenshots/e2/e2-1.png",
+      "url": "../Playwright/ghost3.3.0/screenshots/e2/e2-1.png",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",
@@ -70,7 +70,7 @@
     {
       "label": "e2-2",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": ".././ghost3.3.0/screenshots/e2/e2-2.png",
+      "url": "../Playwright/ghost3.3.0/screenshots/e2/e2-2.png",
       "referenceUrl": "",
       "readyEvent": "",
       "readySelector": "",

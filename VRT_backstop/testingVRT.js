@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const fs = require('fs');
-const pathImagesArray = "../ghost3.3.0/screenshots";
+const pathImagesArray = "../Playwright/ghost3.3.0/screenshots";
 //Se carga los escenarios requeridos junto con el numero de screenshots a revisar
 
 (async() => {
@@ -46,7 +46,7 @@ const pathImagesArray = "../ghost3.3.0/screenshots";
                         `{
                   "label": "${escenarios[i][0]}-${j+1}",
                   "cookiePath": "backstop_data/engine_scripts/cookies.json",
-                  "url": ".././ghost${version}/screenshots/${escenarios[i][0]}/${escenarios[i][0]}-${j+1}.png",
+                  "url": "../Playwright/ghost${version}/screenshots/${escenarios[i][0]}/${escenarios[i][0]}-${j+1}.png",
                   "referenceUrl": "",
                   "readyEvent": "",
                   "readySelector": "",
@@ -67,7 +67,7 @@ const pathImagesArray = "../ghost3.3.0/screenshots";
                         `{
                   "label": "${escenarios[i][0]}-${j+1}",
                   "cookiePath": "backstop_data/engine_scripts/cookies.json",
-                  "url": ".././ghost${version}/screenshots/${escenarios[i][0]}/${escenarios[i][0]}-${j+1}.png",
+                  "url": "../Playwright/ghost${version}/screenshots/${escenarios[i][0]}/${escenarios[i][0]}-${j+1}.png",
                   "referenceUrl": "",
                   "readyEvent": "",
                   "readySelector": "",
