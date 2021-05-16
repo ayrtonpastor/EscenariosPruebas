@@ -4,7 +4,7 @@
 3. Configurar las variables de playwright
 4. Ejecutar las pruebas
 
-## 1. Instalar Ghost versión 3.3.0 de manera local
+## 1. Instalar ghost, debe tener una instalacion de la versión 3.3.0 y otra de la version 3.42.5 de manera local
 Se debe instalar ghost de manera local, tener un Node JS version 12.
 
 Instalar el CLI de Ghost:
