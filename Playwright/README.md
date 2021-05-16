@@ -4,7 +4,7 @@
 3. Configurar las variables de playwright
 4. Ejecutar las pruebas
 
-## 1. Instalar ghost, debe tener una instalacion de la versión 3.3.0 y otra de la version 3.42.5 de manera local
+## 1. Instalar ghost versión 3.3.0 o versión 3.42.5 de manera local
 Se debe instalar ghost de manera local, tener un Node JS version 12.
 
 Instalar el CLI de Ghost:
@@ -20,6 +20,8 @@ Email de admin: administrador123@example.com
 Contraseña de admin: administrador123
 ```
 No es obligatorio pero son datos sugeridos para evitar configurar el codigo
+
+Nota: Si tiene ambas versiones de ghost encendidas, tendrá problemas con los puertos de ejecución. Para apagar/encender una versión de ghost deberá dirigirse a la raiz donde se encuentre la versión de ghost que desee manipular y ejecutar ```ghost stop``` para apagar o ```ghost start``` para encender.
 
 ## 2. Instalar las dependencias de playwright
 Asegurese de estar en la ruta ```<Path-al-proyecto>\Playwright\ghost<version_deseada>``` y ejecute
