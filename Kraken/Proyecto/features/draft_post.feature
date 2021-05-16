@@ -2,7 +2,7 @@ Feature: Crear draft de post
 
   @user1 @web
   Scenario: e3, Como usuario quiero crear un posts como draft, verificar que existe y limpiarla
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     Then I login with credentials
     Then I navigate to menu "posts/"
     Then I create new "post/"

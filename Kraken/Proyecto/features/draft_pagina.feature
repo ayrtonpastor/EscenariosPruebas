@@ -2,7 +2,7 @@ Feature: Crear draft de pagina
 
   @user1 @web
   Scenario: e7, Como usuario quiero crear una pagina como draft, verificar que existe y limpiarla
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     Then I login with credentials
     Then I navigate to menu "pages/"
     Then I create new "page/"

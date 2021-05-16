@@ -2,7 +2,7 @@ Feature: Shared board connection
 
   @user1 @web
   Scenario: e8, Create a published page
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     When I login with credentials
     And I click on element having css selector "[href='#/pages/']"
     And I click on element having css selector "[href='#/editor/page/']"

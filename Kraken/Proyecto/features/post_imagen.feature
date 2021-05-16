@@ -2,7 +2,7 @@ Feature: Crear un post con imagen
 
   @user1 @web
   Scenario: e15, Como usuario quiero crear un post como draft, agregarle una imagen, publicarlo y limpiarlo
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     Then I login with credentials
     Then I navigate to menu "posts/"
     Then I create new "post/"

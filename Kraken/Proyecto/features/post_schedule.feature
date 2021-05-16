@@ -2,7 +2,7 @@ Feature: Agendar creacion de post
 
   @user1 @web
   Scenario: e19, Como usuario quiero agendar la creacion de un post y luego limpiarlo
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     Then I login with credentials
     Then I navigate to menu "posts/"
     Then I create new "post/"

@@ -1,11 +1,15 @@
 if ENV["ADB_DEVICE_ARG"].nil?
   
-  $username = "administrador123@example.com"
-  $password = "administrador123"
-  $profile_name = "Ayrton Pastor C."
+  # ------------------------------Variables a modificar---------------------------------------------
+  $username = "b@uniandes.edu.co"
+  $password = "$0987654321."
+  $profile_name = "Juan Carlos"
+  $urlABP = "http://localhost:2368/ghost"
+  $ghostVersion = "3.42.5"
+  # ----------------------------------------------------------------------------------------------------
+
   $numberStep = 1
   $scenario  = ""
-
 
   require 'kraken-mobile/steps/web/kraken_steps'
 
@@ -26,7 +30,9 @@ if ENV["ADB_DEVICE_ARG"].nil?
 
   
   Given(/^I navigate to page with the url stored in the variable$/) do
-    $url_variable = IO.read("./.variable.txt")  
+    raise 'ERROR: Invalid URL' if $urlABP.nil?
+    raise 'ERROR: Invalid URL' unless $urlABP =~ URI::DEFAULT_PARSER.make_regexp
+    $url_variable = $urlABP
     puts($url_variable)
     @driver.navigate.to $url_variable
     sleep 2
@@ -230,15 +236,15 @@ if ENV["ADB_DEVICE_ARG"].nil?
   end
 
   
-  Then (/^I verify is logged with the username: "(.*)"$/)do |username|
-    userCard = @driver.find_element(:css,'span[title="'+username+'"]')
-    if(userCard.text != username)
+  Then (/^I verify is logged with the username from credentials$/)do
+    userCard = @driver.find_element(:css,'span[title="'+$profile_name+'"]')
+    if(userCard.text != $profile_name)
       raise "El nombre de usuario es incorrecto"
     end
   end
 
-  Then(/^I logout from ghost of "(.*)"$/)do |username|
-    @driver.find_element(:css,'span[title="'+username+'"]').click()
+  Then(/^I logout from ghost of username from credentials$/)do
+    @driver.find_element(:css,'span[title="'+$profile_name+'"]').click()
     sleep 1
     @driver.find_element(:css,'a[href="#/signout/"]').click()
   end
@@ -354,8 +360,7 @@ if ENV["ADB_DEVICE_ARG"].nil?
 
   # Hooks
   AfterStep do |_scenario|
-    ghostVersion = IO.read('ghostVersion')
-    path="./screenshots/#{ghostVersion}/#{$scenario}/#{$numberStep}.png"
+    path="./screenshots/#{$ghostVersion}/#{$scenario}/#{$numberStep}.png"
     @driver.save_screenshot(path)
     embed(path, 'image/png', File.basename(path))
     $numberStep = $numberStep.to_i + 1
@@ -365,9 +370,8 @@ if ENV["ADB_DEVICE_ARG"].nil?
     numberScenario = scenario.name
     $scenario =  numberScenario.split(",")
     $scenario = $scenario[0]
-    ghostVersion = IO.read('ghostVersion').to_s
     firstPath = "./screenshots"
-    secondPath = "#{firstPath}/#{ghostVersion}"
+    secondPath = "#{firstPath}/#{$ghostVersion}"
     thirdPath = "#{secondPath}/#{$scenario}"
     if (!File.exist?(firstPath))
       Dir.mkdir(firstPath)

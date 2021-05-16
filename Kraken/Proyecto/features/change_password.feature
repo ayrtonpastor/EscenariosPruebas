@@ -2,7 +2,7 @@ Feature: Cambiar contrasena de usuario Ghost
 
   @user1 @web
   Scenario: e2, Como usuario quiero cambiar la contrasena del usuario Ghost
-    Given I navigate to page "http://localhost:2368/ghost"
+    Given I navigate to page with the url stored in the variable
     Then I login with credentials
     Then I navigate to menu "staff/"
     Then I go to config user "Ghost"
