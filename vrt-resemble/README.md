@@ -1,8 +1,8 @@
 # Pasos para ejecutar las pruebas VRT con ResembleJS
 1. Generar imágenes de pasos de pruebas en Ghost 3.3.0 con Playwright
 2. Generar imágenes de pasos de pruebas en Ghost 3.42.5 con Playwright
-3. Instalar las dependencias de BackStopJS
-4. Ejecutar las pruebas de BackStopJS
+3. Instalar las dependencias de ResembleJS
+4. Ejecutar las pruebas de ResembleJS
 
 ## 1. Generar imágenes de pasos de pruebas en Ghost 3.3.0 en Playwright
 Ejecutar las pruebas para Ghost 3.3.0 elaboradas con Playwright apoyándose con este [README.md](https://github.com/EdgarLunaG-442/EscenariosPruebas/tree/master/Playwright#readme). Si ya realizó este paso para las pruebas en BackStopJS, omitirlo.
