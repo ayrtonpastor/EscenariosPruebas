@@ -44,7 +44,7 @@ Instalar la version de Ghost deseada en una carpeta vacia:
     * $password: La contraseña que uso en el formulario de registro.
     * $profile_name: El nombre exacto que uso en el formulario de registro
     * $urlABP: La url del servicio de host que por defecto deberìa ser ```'http://localhost:2368/ghost/'```
-    * $ghostVersion: La versión de ghost que esté corriendo  en formato X.XX.X / Esta variable es importante por que sera el nombre de la carpeta donde se alojaran los screenshots
+    * $ghostVersion: La versión de ghost que esté corriendo en formato X.XX.X (3.3.0 ó 3.42.5) / Esta variable es importante por que sera el nombre de la carpeta donde se alojaran los screenshots
 
 - Ubiquese en ```Kraken/Proyecto``` Ejecute las pruebas con el comando ```bundle exec kraken-mobile run```
 
