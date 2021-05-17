@@ -1,9 +1,9 @@
 if ENV["ADB_DEVICE_ARG"].nil?
   
   # ------------------------------Variables a modificar---------------------------------------------
-  $username = "b@uniandes.edu.co"
-  $password = "$0987654321."
-  $profile_name = "Juan Carlos"
+  $username = "administrador123@example.com"
+  $password = "administrador123"
+  $profile_name = "Ayrton Pastor C."
   $urlABP = "http://localhost:2368/ghost"
   $ghostVersion = "3.42.5"
   # ----------------------------------------------------------------------------------------------------
