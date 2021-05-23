@@ -29,6 +29,7 @@ const faker = require('faker');
 
 //Función flecha asíncrona
 (async() => {
+
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -462,15 +463,30 @@ const faker = require('faker');
         'public'
     );
 */
-    //TODO NEW SCENARIOS
+    var index=0
+    const e19_apriori_data = require("../aprioriData/e19_data.json");
+    for (let row of e19_apriori_data) {
+        await e19.escenario19(
+            url,
+            'chromium',
+            `e19_${index++}`,
+            administratorEmail,
+            administratorPassword,
+            'posts',
+            'Post agendado',
+            row['date']
+        );
+    }
+    const e19_faker_date = faker.date.future(2)
     await e19.escenario19(
         url,
         'chromium',
-        'e19',
+        `e19_${index++}`,
         administratorEmail,
         administratorPassword,
         'posts',
-        'Post agendado'
+        'Post agendado',
+        `${e19_faker_date.getFullYear()}-${('0' + e19_faker_date.getMonth()).slice(-2)}-${('0' + e19_faker_date.getDay()).slice(-2)}`
     );
 /* 
     // Scene 20's params:
