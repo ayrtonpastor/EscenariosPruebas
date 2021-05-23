@@ -144,13 +144,22 @@ exports.changePostOwnerClose = async(page, old_owner, new_owner) => {
     await this.esperar(1000)
 }
 
-exports.schedulePublishPost = async(page) => {
+exports.schedulePublishPost = async(page, m_date) => {
     page = page[0]
     await this.esperar(2000)
     await page.click(`xpath=//div/span[text()='Publish']`)
     await this.esperar(2000)
     await page.click(`xpath=//div[contains(@class,'gh-publishmenu-radio')]//div[text()='Schedule it for later']`)
-    await this.esperar(2000)
+    await this.esperar(2000)    
+    let input_selector = await page.waitForSelector(`xpath=//div[contains(@class,'gh-date-time-picker-date')]//input`)
+    await input_selector.click()
+    for(let i=0;i<10;i++){   
+        await page.keyboard.press('Delete')
+        await page.keyboard.press('Backspace')
+    }
+    await this.esperar(1000)
+    await input_selector.type(m_date)
+    await this.esperar(1000)
     await page.click(`xpath=//button[contains(@class,'gh-publishmenu-button')]//span[text()='Schedule']`)
 }
 
