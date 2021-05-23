@@ -56,7 +56,7 @@ const faker = require('faker');
     }
 
 
-
+/* 
     //Escenario 2 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -79,13 +79,14 @@ const faker = require('faker');
         'ghost-author@example.com',
         '1234567890$'
     );
-
+*/
+    var index=0
     const e3_apriori_data = require("../aprioriData/e3_data.json");
     for (let row of e3_apriori_data) {
         await e3.escenario3(
             url,
             'chromium',
-            'e3',
+            `e3_${index++}`,
             administratorEmail,
             administratorPassword,
             'posts',
@@ -96,14 +97,14 @@ const faker = require('faker');
     await e3.escenario3(
         url,
         'chromium',
-        'e3',
+        `e3_${index++}`,
         administratorEmail,
         administratorPassword,
         'posts',
         faker.lorem.sentence()
     );
 
-
+/* 
     //Escenario 4 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -180,13 +181,15 @@ const faker = require('faker');
         'Post Escenario 6',
         'texto de prueba del post'
     );
-
+    */
+   
+    var index = 0
     const e7_apriori_data = require("../aprioriData/e7_data.json");
     for (let row of e7_apriori_data) {
         await e7.escenario7(
             url,
             'chromium',
-            'e7',
+            `e7_${index++}`,
             administratorEmail,
             administratorPassword,
             administratorName,
@@ -197,14 +200,14 @@ const faker = require('faker');
     await e7.escenario7(
         url,
         'chromium',
-        'e7',
+        `e7_${index++}`,
         administratorEmail,
         administratorPassword,
         administratorName,
         'pages',
         faker.lorem.sentence()
     );
-
+/* 
     // Escenario 8 que recibe por parametro:
     // @param url: constante global de url de pagina
     // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -270,14 +273,14 @@ const faker = require('faker');
         'Pagina Escenario 10',
         'texto de prueba de la pagina'
     );
-
-
+*/
+    var index = 0
     const e11_apriori_data = require("../aprioriData/e11_data.json");
     for (let row of e11_apriori_data) {
         await e11.escenario11(
             url,
             'chromium',
-            'e11',
+            `e11_${index++}`,
             administratorEmail,
             administratorPassword,
             'posts',
@@ -290,7 +293,7 @@ const faker = require('faker');
     await e11.escenario11(
         url,
         'chromium',
-        'e11',
+        `e11_${index++}`,
         administratorEmail,
         administratorPassword,
         'posts',
@@ -298,7 +301,7 @@ const faker = require('faker');
         administratorName,
         faker.name.firstName()
     );
-    
+/*     
     // Escenario 12 que recibe por parametro:
     // @param url: constante global de url de pagina
     // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -362,14 +365,14 @@ const faker = require('faker');
         'staff',
         'EDITOR'
     );
-
-    
+*/
+    var index = 0
     const e15_apriori_data = require("../aprioriData/e15_data.json");
     for (let row of e15_apriori_data) {
         await e15.escenario15(
             url,
             'chromium',
-            'e15',
+            `e15_${index++}`,
             administratorEmail,
             administratorPassword,
             'posts',
@@ -381,14 +384,14 @@ const faker = require('faker');
     await e15.escenario15(
         url,
         'chromium',
-        'e15',
+        `e15_${index++}`,
         administratorEmail,
         administratorPassword,
         'posts',
         'Post Con Imagen',
         faker.image.imageUrl()
     )
-
+/* 
     // Scene 16's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
@@ -458,7 +461,7 @@ const faker = require('faker');
         'TagPublica',
         'public'
     );
-
+*/
     //TODO NEW SCENARIOS
     await e19.escenario19(
         url,
@@ -469,7 +472,7 @@ const faker = require('faker');
         'posts',
         'Post agendado'
     );
-
+/* 
     // Scene 20's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
@@ -489,4 +492,5 @@ const faker = require('faker');
         'Tag para eliminar',
         'public'
     );
+*/
 })(); //Llamado propio de la función
