@@ -25,13 +25,8 @@ const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
 const faker = require('faker');
 
-const e4AprioriData = require('../aprioriData/e4AprioriData.json');
-const e8AprioriData = require('../aprioriData/e8AprioriData.json');
-const e12AprioriData = require('../aprioriData/e12AprioriData.json');
-const e16AprioriData = require('../aprioriData/e16AprioriData.json');
-const e20AprioriData = require('../aprioriData/e20AprioriData.json');
-
 const p_mockaroo_data = require('../pseudoRandom/Mockaroo.json')
+const aMockarooData = require('../pseudoRandom/Mockaroo1.json')
 
 const randomValue = (list) => {
     return list[Math.floor(Math.random() * list.length)];
@@ -176,6 +171,17 @@ const randomValue = (list) => {
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         faker.lorem.paragraph()
     );
+    await e4.escenario4(
+        url,
+        'chromium',
+        `e4-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        randomValue(aMockarooData)['title'],
+        randomValue(aMockarooData)['description']
+    );
 
     // //Escenario 5 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -311,6 +317,17 @@ const randomValue = (list) => {
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         faker.lorem.paragraph()
     );
+    await e8.escenario8(
+        url,
+        'chromium',
+        `e8-Pseudo-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        randomValue(aMockarooData)['title'],
+        randomValue(aMockarooData)['description']
+    );
 
 
     // //Escenario 9 que recibe por parametro:
@@ -438,6 +455,17 @@ const randomValue = (list) => {
         'pages',
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         faker.lorem.paragraph()
+    );
+    await e12.escenario12(
+        url,
+        'chromium',
+        `e12-Pseudo-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        randomValue(aMockarooData)['title'],
+        randomValue(aMockarooData)['description']
     );
 
 
@@ -569,6 +597,17 @@ const randomValue = (list) => {
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         'private'
     );
+    await e16.escenario16(
+        url,
+        'chromium',
+        `e16-Pseudo-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        randomValue(aMockarooData)['title'],
+        randomValue(aMockarooData)['title'],
+        'private'
+    );
 
 
     // //Escenario 17 que recibe por parametro:
@@ -693,6 +732,16 @@ const randomValue = (list) => {
         administratorPassword,
         administratorName,
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        'private'
+    );
+    await e20.escenario20(
+        url,
+        'chromium',
+        `e20-Pseudo-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        randomValue(aMockarooData)['title'],
         'private'
     );
 })(); //Llamado propio de la función
