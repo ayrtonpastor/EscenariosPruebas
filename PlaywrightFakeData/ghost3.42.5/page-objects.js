@@ -133,7 +133,8 @@ exports.changePostOwner = async(page, old_owner, new_owner) => {
     await this.esperar(1000)
     await page.click(`xpath=//div[label[text()='Authors']]//div[@role='button']`)
     await page.keyboard.press('Backspace')
-    await page.click(`xpath=//ul[@role='listbox']//li[@role='option' and text()='${new_owner}']`)
+    await page.keyboard.type(new_owner)
+    await page.keyboard.press('Enter')
     await this.esperar(1000)
 }
 
@@ -153,7 +154,7 @@ exports.schedulePublishPost = async(page) => {
     await page.click(`xpath=//button[contains(@class,'gh-publishmenu-button')]//span[text()='Schedule']`)
 }
 
-exports.enterImageContentToPost = async(page) => {
+exports.enterImageContentToPost = async(page, url) => {
     page = page[0]
     await page.click(`xpath=//*[@data-placeholder='Begin writing your post...']`)
     await this.esperar(1000)
@@ -161,7 +162,7 @@ exports.enterImageContentToPost = async(page) => {
     await this.esperar(1000)
     await page.click(`xpath=//div[@data-kg='cardmenu-card']//div[text()='HTML']`)
     await this.esperar(1000)
-    await page.keyboard.insertText("<img src='https://ichef.bbci.co.uk/news/640/cpsprodpb/15A5F/production/_115017688_c6122844-332e-4516-a812-e56991e9374a.jpg'/>");
+    await page.keyboard.insertText(`<img src='${url}'/>`);
 }
 
 exports.performActionOnElement = async(page, action, type_element) => {
@@ -202,7 +203,7 @@ exports.verificarPostPublicado = async(page, tituloPost) => {
 
 exports.eliminarPost = async(page, tituloPost) => {
     page = page[0]
-    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost}")`)
+    const postTitle = await page.waitForSelector(`.gh-content-entry-title:text("${tituloPost.trim() === '' ? '(Untitled)' : tituloPost}")`)
     const divPost = await postTitle.$('xpath=../..')
     await divPost.click()
     const settingButton = await page.waitForSelector('button[title="Settings"]');
@@ -256,9 +257,9 @@ exports.verificarModalErrorLongTitle = async(page) => {
 }
 exports.asignarPageANavBar = async(page, pageTitle) => {
     page = page[0];
-    await page.type(`xpath=/html/body/div[2]/div/main/section/section/div[2]/form/div[2]/div/span[1]/input`, `${pageTitle}`);
+    await page.type(`xpath=/html/body/div[2]/div/main/section/section/div[2]/form/div[2]/div/span[1]/input`, `${pageTitle.trim() === '' ? '(Untitle)' : pageTitle}`);
     await page.keyboard.press('Tab');
-    await page.keyboard.type(`${pageTitle.replace(/ /g, "-").toLowerCase().trim()}`);
+    await page.keyboard.type(`${pageTitle.trim() === '' ? '(Untitle)' : pageTitle.replace(/ /g, "-").toLowerCase().trim()}`);
 }
 
 exports.clicEn = async(page, textElement) => {
@@ -291,7 +292,8 @@ exports.filtrarYEditarTag = async(page, tagName, tagStatus) => {
     } else {
         await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
     }
-    await page.click(`a[href="#/tags/${(tagStatus === 'private' ? 'hash-' : '')+tagName.replace(/ /g, "-").toLowerCase().trim()}/"]`);
+    // await page.click(`a[href="#/tags/${(tagStatus === 'private' ? 'hash-' : '')+tagName.replace(/ /g, "-").toLowerCase().trim()}/"]`);
+    await page.click(`xpath=//a/h3[text()='${(tagStatus === 'private' ? '#' : '')+tagName.toLowerCase().trim()}'][1]`);
 }
 
 exports.eliminarTag = async(page) => {
@@ -303,20 +305,19 @@ exports.eliminarTag = async(page) => {
 
 exports.validarEliminacionDeTag = async(page, tagName, tagStatus) => {
     page = page[0];
+    await page.reload();
     if (tagStatus === 'private') {
-        await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`);
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[2]`);
     } else {
         await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
     }
-    const length = await page.$$eval(`text="${tagName.trim()}"`, (items) => items.length);
-    expect(length).toBe(0)
 }
 
 exports.asignarEtiquetaAPost = async(page, postName, tagName, tagStatus) => {
     page = page[0];
     await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/button`);
     await page.type(`xpath=//div[label[@for='tag-input']]//ul/input`,
-        `${tagStatus == 'private' ? '#' : ''}${tagName.trim()}`);
+        `${tagStatus === 'private' ? '#' : ''}${tagName.trim()}`);
     await page.keyboard.press('Tab');
     await page.click(`xpath=//html/body/div[4]/div[1]/div/div/div/div/div[1]/div/div[1]/div[1]/button`);
     await this.esperar(1500)
@@ -325,8 +326,7 @@ exports.asignarEtiquetaAPost = async(page, postName, tagName, tagStatus) => {
 exports.filtrarPostsPorTag = async(page, tagName, tagStatus) => {
     page = page[0];
     await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/div[3]/div[1]`);
-    await page.keyboard.type(`${tagStatus === 'private' ? '#' : ''}${tagName.trim()}`);
-    await page.keyboard.press('Enter');
+    await page.click(`.ember-power-select-option:text("${tagStatus === 'private' ? '#' : ''}${tagName.trim()}")`);
 }
 
 exports.validarEtiquetaAPost = async(page, postName) => {
@@ -401,4 +401,34 @@ exports.verificarRolCorrecto = async(page, rol, user) => {
     const divPost = await postTitle.$('xpath=../../..')
     const badgeStatus = await divPost.$('span.gh-badge')
     expect(await badgeStatus.innerText()).toBe(`${rol}`)
+}
+
+exports.eliminarUltimoPostOPage = async(page) => {
+    page = page[0]
+    await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/div[4]/div[1]`);
+    await page.click(`xpath=//html/body/div[1]/div/ul/li[1]`);
+    await page.click(`xpath=//html/body/div[2]/div/main/section/section/ol/li[2]/a[1]`);
+    const settingButton = await page.waitForSelector('button[title="Settings"]');
+    await settingButton.click()
+    const delButton = await page.waitForSelector('.settings-menu-delete-button')
+    await delButton.click()
+    await page.waitForSelector('section.modal-content')
+    const modal = await page.$('section.modal-content')
+    const confirmDelButt = await modal.$('.gh-btn-red')
+    await confirmDelButt.click()
+}
+
+exports.eliminarUltimoTag = async(page, tagStatus, tagName) => {
+    page = page[0];
+    await page.reload();
+    if (tagStatus === 'private') {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[2]`);
+    } else {
+        await page.click(`xpath=//html/body/div[2]/div/main/section/header/section/div/button[1]`);
+    }
+    await this.esperar(1000)
+    await page.click(`xpath=//a/h3[text()='${(tagStatus === 'private' ? '#' : '')+tagName.toLowerCase().trim()}'][1]`);
+    await this.esperar(1000)
+    await page.click(`xpath=//html/body/div[2]/div/main/section/button`);
+    await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`);
 }

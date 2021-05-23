@@ -1,5 +1,5 @@
 const po = require('../page-objects')
-exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, ghostEmail, newPass) => {
+exports.escenario2 = async (url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, ghostEmail, newPass) => {
 
     
     console.log('Escenario '+ scenarioTag +': Cambiar contrasena usuario Ghost')
@@ -27,7 +27,7 @@ exports.escenario2 = async(url, browser, scenarioTag, correctEmail, correctPass,
 
         // navega a una subruta dada por parametro 
         await po.navegarA(page, navSubRoute)
-            //...
+        //...
         await po.tomarCaptura(page, scenarioTag)
 
         // navega a una subruta dada por parametro 
