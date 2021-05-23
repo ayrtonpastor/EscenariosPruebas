@@ -32,10 +32,14 @@ const e12AprioriData = require('../aprioriData/e12AprioriData.json');
 const e16AprioriData = require('../aprioriData/e16AprioriData.json');
 const e20AprioriData = require('../aprioriData/e20AprioriData.json');
 
+const p_mockaroo_data = require('../pseudoRandom/Mockaroo.json')
 
+const randomValue = (list) => {
+    return list[Math.floor(Math.random() * list.length)];
+};
 //Función flecha asíncrona
 (async() => {
-
+    /* */
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -145,6 +149,18 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         'posts',
         faker.lorem.sentence()
     );
+
+    await e3.escenario3(
+        url,
+        'chromium',
+        `e3_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        randomValue(p_mockaroo_data)['title']
+    );
+
+    
 
     //Escenario 4 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -289,6 +305,17 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         'pages',
         faker.lorem.sentence()
     );
+    await e7.escenario7(
+        url,
+        'chromium',
+        `e7_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        randomValue(p_mockaroo_data)['title']
+    );
+    
 
     // Escenario 8 que recibe por parametro:
     // @param url: constante global de url de pagina
@@ -423,6 +450,18 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         faker.lorem.sentence(),
         administratorName,
         faker.name.firstName()
+    );
+
+    await e11.escenario11(
+        url,
+        'chromium',
+        `e11_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        randomValue(p_mockaroo_data)['title'],
+        administratorName,
+        randomValue(p_mockaroo_data)['name']
     );
 
     // Escenario 12 que recibe por parametro:
@@ -563,6 +602,18 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         faker.image.imageUrl()
     )
 
+    await e15.escenario15(
+        url,
+        'chromium',
+        `e15_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        'Post Con Imagen',
+        randomValue(p_mockaroo_data)['imgSrc']
+    )
+    
+
     // Scene 16's params:
     // @param url: global url
     // @param browser: chromium firefox or webkit
@@ -661,7 +712,7 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         faker.lorem.sentence(),
         'public'
     );
-    
+
     var index=0
     const e19_apriori_data = require("../aprioriData/e19_data.json");
     for (let row of e19_apriori_data) {
@@ -687,6 +738,17 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         'Post agendado',
         `${e19_faker_date.getFullYear()}-${('0' + e19_faker_date.getMonth()).slice(-2)}-${('0' + e19_faker_date.getDay()).slice(-2)}`
     );
+
+    await e19.escenario19(
+        url,
+        'chromium',
+        `e19_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        'Post agendado',
+        randomValue(p_mockaroo_data)['date']
+        );
 
     // Scene 20's params:
     // @param url: global url
