@@ -18,16 +18,20 @@ const e17 = require('./escenarios/escenario17');
 const e18 = require('./escenarios/escenario18')
 const e19 = require('./escenarios/escenario19');
 const e20 = require('./escenarios/escenario20');
-const e1_apriori_Data = require('../aprioriData/MOCK_DATA.json');
+const p_mockaroo_data = require('../pseudoRandom/Mockaroo.json')
+const aMockarooData = require('../pseudoRandom/Mockaroo1.json')
+const jcMockarooData = require('../pseudoRandom/Mockaroo2.json')
+const e1_apriori_Data = require('../aprioriData/e1AprioriData.json');
+const e5_apriori_Data = require('../aprioriData/e5AprioriData.json');
+const e13_apriori_Data = require('../aprioriData/e13AprioriData.json');
+const pseudoEFLG = require('../pseudoRandom/Mockaroo4.json')
+const faker = require('faker');
+
 const url = 'http://localhost:2368/ghost/';
 const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
-const faker = require('faker');
 
-const p_mockaroo_data = require('../pseudoRandom/Mockaroo.json')
-const aMockarooData = require('../pseudoRandom/Mockaroo1.json')
-const jcMockarooData = require('../pseudoRandom/Mockaroo2.json')
 
 const randomValue = (list) => {
     return list[Math.floor(Math.random() * list.length)];
@@ -46,19 +50,46 @@ const randomValue = (list) => {
     //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
 
+    //4 Escenarios con datos apriori en base al escenario 1
     for (let i = 0; i < e1_apriori_Data.length; i++) {
+
         await e1.escenario1(
             url,
             'chromium',
-            'e1',
+            'e1-' + i,
             e1_apriori_Data[i]['correo'],
             e1_apriori_Data[i]['contrasena'],
             administratorEmail,
             administratorPassword,
-            administratorName,
+            e1_apriori_Data[i]['nombre'],
             'staff'
         );
     }
+    //1 escenario totalmente pseudo-aleatorio en base al escenario 1
+    await e1.escenario1(
+        url,
+        'chromium',
+        'e1-4',
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['correo'],
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['contrasena'],
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff'
+    );
+
+    //1 escenario totalmente aleatorio en base al escenario 1
+    await e1.escenario1(
+        url,
+        'chromium',
+        'e1-5',
+        faker.internet.email(),
+        faker.internet.password(),
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff'
+    );
 
 
 
@@ -75,7 +106,7 @@ const randomValue = (list) => {
 
     const e2_apriori_Data = require('../aprioriData/e2_data.json');
     for (let i = 0; i < e2_apriori_Data.length; i++) {
-        let a = i+1;
+        let a = i + 1;
         await e2.escenario2(
             url,
             'chromium',
@@ -85,7 +116,7 @@ const randomValue = (list) => {
             administratorName,
             'staff',
             e2_apriori_Data[i]['correo'],
-            e2_apriori_Data[i]['contrasena']           
+            e2_apriori_Data[i]['contrasena']
         );
     }
     await e2.escenario2(
@@ -111,7 +142,7 @@ const randomValue = (list) => {
         randomValue(jcMockarooData)['password']
     );
 
-    var index=0
+    var index = 0
     const e3_apriori_data = require("../aprioriData/e3_data.json");
     for (let row of e3_apriori_data) {
         await e3.escenario3(
@@ -144,7 +175,7 @@ const randomValue = (list) => {
         randomValue(p_mockaroo_data)['title']
     );
 
-    
+
 
     //Escenario 4 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -179,7 +210,7 @@ const randomValue = (list) => {
         administratorPassword,
         administratorName,
         'posts',
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
         faker.lorem.paragraph()
     );
     await e4.escenario4(
@@ -204,17 +235,48 @@ const randomValue = (list) => {
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param postTitle: titulo del post
     // //@param textPost: texto del post
-    // await e5.escenario5(
-    //     url,
-    //     'chromium',
-    //     'e5',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'posts',
-    //     'Post Nuevo Prueba',
-    //     'texto de prueba del post'
-    // );
+
+    //4 Escenarios con datos apriori en base al escenario 5
+    for (let i = 0; i < e5_apriori_Data.length; i++) {
+        await e5.escenario5(
+            url,
+            'chromium',
+            'e5-' + i,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'posts',
+            e5_apriori_Data[i]['titulo'],
+            e5_apriori_Data[i]['descripcion']
+        );
+    }
+
+
+    //1 escenario pseudoaleatorio en base al escenario 5
+    await e5.escenario5(
+        url,
+        'chromium',
+        'e5-4',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['titulo'],
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['descripcion']
+    );
+
+    //1 escenario totalmente aleatorio en base al escenario 5
+    await e5.escenario5(
+        url,
+        'chromium',
+        'e5-5',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        faker.lorem.text(10),
+        faker.lorem.text(10)
+    );
 
 
     //Escenario 6 que recibe por parametro:
@@ -229,11 +291,11 @@ const randomValue = (list) => {
     //@param textPost: texto del post
     const e6_apriori_Data = require('../aprioriData/e6_data.json');
     for (let i = 0; i < e6_apriori_Data.length; i++) {
-        let a = i+1;
+        let a = i + 1;
         await e6.escenario6(
             url,
             'chromium',
-            'e6_'+ a,
+            'e6_' + a,
             administratorEmail,
             administratorPassword,
             administratorName,
@@ -264,7 +326,7 @@ const randomValue = (list) => {
         randomValue(jcMockarooData)['tituloPost'],
         randomValue(jcMockarooData)['textoPost']
     );
-    
+
 
     var index = 0
     const e7_apriori_data = require("../aprioriData/e7_data.json");
@@ -300,7 +362,7 @@ const randomValue = (list) => {
         'pages',
         randomValue(p_mockaroo_data)['title']
     );
-    
+
 
 
     // Escenario 8 que recibe por parametro:
@@ -336,7 +398,7 @@ const randomValue = (list) => {
         administratorPassword,
         administratorName,
         'pages',
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
         faker.lorem.paragraph()
     );
     await e8.escenario8(
@@ -362,26 +424,58 @@ const randomValue = (list) => {
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param postTitle: titulo del post
     // //@param textPost: texto del post
-    // await e9.escenario9(
-    //     url,
-    //     'chromium',
-    //     'e9',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Page Nueva Prueba',
-    //     'texto de prueba de la pagina'
-    // );
 
+    //4 Escenarios con datos apriori en base al escenario 9
+    for (let i = 0; i < e5_apriori_Data.length; i++) {
+        await e9.escenario9(
+            url,
+            'chromium',
+            'e9-' + i,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            e5_apriori_Data[i]['titulo'],
+            e5_apriori_Data[i]['descripcion']
+        );
+
+    }
+
+
+
+    //1 Escenario con datos pseudo-aleatorio en base al escenario 9
+    await e9.escenario9(
+        url,
+        'chromium',
+        'e9-4',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['titulo'],
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['descripcion']
+
+    );
+    //1 Escenario con datos aleatorios en base al escenario 9
+    await e9.escenario9(
+        url,
+        'chromium',
+        'e9-5',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        faker.lorem.text(10),
+        faker.lorem.text(10)
+    );
 
     const e10_apriori_Data = require('../aprioriData/e10_data.json');
     for (let i = 0; i < e10_apriori_Data.length; i++) {
-        let a = i+1;
+        let a = i + 1;
         await e10.escenario10(
             url,
             'chromium',
-            'e10_'+ a,
+            'e10_' + a,
             administratorEmail,
             administratorPassword,
             administratorName,
@@ -412,7 +506,7 @@ const randomValue = (list) => {
         randomValue(jcMockarooData)['tituloPagina'],
         randomValue(jcMockarooData)['textoPagina']
     );
-    
+
 
     var index = 0
     const e11_apriori_data = require("../aprioriData/e11_data.json");
@@ -486,7 +580,7 @@ const randomValue = (list) => {
         administratorPassword,
         administratorName,
         'pages',
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
         faker.lorem.paragraph()
     );
     await e12.escenario12(
@@ -512,17 +606,54 @@ const randomValue = (list) => {
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param newStaffName: nuevo nombre del staff a modificar
     // //@param oldStaffName: nombre actual del staff a modificar
-    // await e13.escenario13(
-    //     url,
-    //     'chromium',
-    //     'e13',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'staff/ghost',
-    //     'ghost1',
-    //     'Ghost'
-    // );
+
+    //4 Escenarios con datos apriori en base al escenario 13
+    for (let i = 0; i < e13_apriori_Data.length; i++) {
+        let oldName;
+        if (i == 0) {
+            oldName = "Ghost"
+        } else {
+            oldName = e13_apriori_Data[i - 1][`name${i}`]
+        }
+        await e13.escenario13(
+            url,
+            'chromium',
+            'e13-' + i,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'staff/ghost',
+            e13_apriori_Data[i][`name${i}`],
+            oldName
+        );
+    }
+
+    //1 Escenario con datos pseudo-aleatorios en base al escenario 13
+    await e13.escenario13(
+        url,
+        'chromium',
+        'e13-4',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff/ghost',
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['nombre'],
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['nombre']
+    );
+
+    //1 Escenario con datos aleatorios en base al escenario 13
+    await e13.escenario13(
+        url,
+        'chromium',
+        'e13-5',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff/ghost',
+        faker.name.firstName(),
+        faker.name.firstName()
+    );
+
     // //Escenario 14 que recibe por parametro:
     // //@param url: constante global de url de pagina
     // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -534,7 +665,7 @@ const randomValue = (list) => {
     // //@param newRol: nombre del nuevo rol a cambiar
     const e14_apriori_Data = require('../aprioriData/e14_data.json');
     for (let i = 0; i < e14_apriori_Data.length; i++) {
-        let a = i+1;
+        let a = i + 1;
         await e14.escenario14(
             url,
             'chromium',
@@ -566,7 +697,7 @@ const randomValue = (list) => {
         'staff',
         randomValue(jcMockarooData)['url'],
     );
-    
+
     var index = 0
     const e15_apriori_data = require("../aprioriData/e15_data.json");
     for (let row of e15_apriori_data) {
@@ -602,7 +733,7 @@ const randomValue = (list) => {
         'Post Con Imagen',
         randomValue(p_mockaroo_data)['imgSrc']
     )
-    
+
 
     // Scene 16's params:
     // @param url: global url
@@ -636,8 +767,8 @@ const randomValue = (list) => {
         administratorEmail,
         administratorPassword,
         administratorName,
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
         'private'
     );
     await e16.escenario16(
@@ -664,23 +795,57 @@ const randomValue = (list) => {
     // //@param postTitle: titulo del post
     // //@param textPost: texto del post,
     // //@Param longPostTitle: titulo de mas de 255 caracteres
-    // await e17.escenario17(
-    //     url,
-    //     'chromium',
-    //     'e17',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Page Nueva Prueba',
-    //     'texto de prueba de la pagina',
-    //     'dadsfasdffffffffffffffffffffffffsdfsdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffferqewrqerqwreSADASdASDSDSFDASDFADSFADSFADSFABCDQa'
-    // );
 
+    //4 Escenarios con datos apriori en base al escenario 17
+
+    for (let i = 0; i < e5_apriori_Data.length; i++) {
+
+        await e17.escenario17(
+            url,
+            'chromium',
+            'e17-' + i,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            e5_apriori_Data[i]['titulo'],
+            e5_apriori_Data[i]['descripcion'],
+            e5_apriori_Data[i]['descripcion']
+        );
+    }
+
+
+    //1 Escenario con datos pseudo-aleatorio en base al escenario 17
+    await e17.escenario17(
+        url,
+        'chromium',
+        'e17-4',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        'Page Nueva Prueba',
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['descripcion'],
+        pseudoEFLG[Math.floor(Math.random() * pseudoEFLG.length)]['titulo']
+    );
+
+    //1 Escenario con datos aleatorio en base al escenario 17
+    await e17.escenario17(
+        url,
+        'chromium',
+        'e17-5',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        'Page Nueva Prueba',
+        faker.lorem.text(256),
+        faker.lorem.text(256)
+    );
 
     const e18_apriori_Data = require('../aprioriData/e18_data.json');
     for (let i = 0; i < e18_apriori_Data.length; i++) {
-        let a = i+1;
+        let a = i + 1;
         await e18.escenario18(
             url,
             'chromium',
@@ -718,8 +883,8 @@ const randomValue = (list) => {
         randomValue(jcMockarooData)['tituloTag'],
         'public'
     );
-    
-    var index=0
+
+    var index = 0
     const e19_apriori_data = require("../aprioriData/e19_data.json");
     for (let row of e19_apriori_data) {
         await e19.escenario19(
@@ -754,7 +919,7 @@ const randomValue = (list) => {
         'posts',
         'Post agendado',
         randomValue(p_mockaroo_data)['date']
-        );
+    );
 
     // Scene 20's params:
     // @param url: global url
@@ -786,7 +951,7 @@ const randomValue = (list) => {
         administratorEmail,
         administratorPassword,
         administratorName,
-        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber() + faker.phone.phoneNumber() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.firstName() + faker.name.lastName() + faker.internet.email(),
         'private'
     );
     await e20.escenario20(
