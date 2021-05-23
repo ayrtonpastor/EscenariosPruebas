@@ -1,11 +1,11 @@
 const po = require('../page-objects')
 exports.escenario2 = async (url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, ghostEmail, newPass) => {
 
-    console.log('Escenario 2: Cambiar contrasena usuario Ghost')
+    
+    console.log('Escenario '+ scenarioTag +': Cambiar contrasena usuario Ghost')
 
-    //construye y dispara el navegador por parametro "chromium, firefox o webkit"
+     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
-
     try {
         //navega a la url que llega por parametro
         await po.navegarUrl(page, url)
@@ -62,16 +62,14 @@ exports.escenario2 = async (url, browser, scenarioTag, correctEmail, correctPass
 
         //Cierra la sesion de usuario Ghost
         await po.cerrarSesion(page, 'Ghost')
-
-        //cierra el navegador y termina la prueba
+        
+        //... cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
-        console.log('Escenario 2: Finalizado')
+        console.log('Escenario '+ scenarioTag +': Finalizado')
     } catch {
-        console.log("Datos invalidos, comportamiento inesperado para el escenario")
         //cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
+        console.log('Escenario '+ scenarioTag +': No se realizaron todos los steps')
+        
     }
-
-
-
 }
