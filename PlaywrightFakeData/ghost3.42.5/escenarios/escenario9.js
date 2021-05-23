@@ -7,69 +7,81 @@ exports.escenario9 = async(url, browser, scenarioTag, correctEmail, correctPass,
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
 
-    //navega a la url que llega por parametro
-    await po.navegarUrl(page, url)
+    try {
 
-    //Realiza una captura de pantalla para un tag de escenario enviado por parametro
-    await po.tomarCaptura(page, scenarioTag)
+        //navega a la url que llega por parametro
+        await po.navegarUrl(page, url)
 
-    //escribe correo y contraseña enviados por parametro en los inputs respectivos
-    await po.realizarLogin(page, correctEmail, correctPass)
+        //Realiza una captura de pantalla para un tag de escenario enviado por parametro
+        await po.tomarCaptura(page, scenarioTag)
 
-    //da click en el boton de Login
-    await po.clickBotonLogin(page)
+        //escribe correo y contraseña enviados por parametro en los inputs respectivos
+        await po.realizarLogin(page, correctEmail, correctPass)
+
+        //da click en el boton de Login
+        await po.clickBotonLogin(page)
 
 
-    //verifica que el login se haga correctamente y que se visualice la pagina principal de ghost
-    await po.verificarLoginCorrecto(page, loggedUserName)
+        //verifica que el login se haga correctamente y que se visualice la pagina principal de ghost
+        await po.verificarLoginCorrecto(page, loggedUserName)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    // navega a una subruta dada por parametro
-    await po.navegarA(page, navSubRoute)
+        // navega a una subruta dada por parametro
+        await po.navegarA(page, navSubRoute)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    //da click en el boton de crear nuevo post
-    await po.clickNuevoPage(page)
+        //da click en el boton de crear nuevo post
+        await po.clickNuevoPage(page)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    // escribe valores por parametro de titulo y texto en los input de editor de post
-    await po.escribirMockEnPost(page, postTitle, textPost)
+        // escribe valores por parametro de titulo y texto en los input de editor de post
+        await po.escribirMockEnPost(page, postTitle, textPost)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    // publica el post
-    await po.publicarPost(page);
+        // publica el post
+        await po.publicarPost(page);
 
-    //...
-    await po.navegarA(page, navSubRoute)
+        //...
+        await po.navegarA(page, navSubRoute)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    // verifica si el post fue publicado correctamente
-    await po.verificarPostPublicado(page, postTitle)
+        // verifica si el post fue publicado correctamente
+        await po.verificarPostPublicado(page, postTitle)
 
-    //Elimina el post cuyo titulo entra por parametro
+        //Elimina el post cuyo titulo entra por parametro
 
-    await po.eliminarPost(page, postTitle)
+        await po.eliminarPost(page, postTitle)
 
-    //...
-    await po.navegarA(page, navSubRoute)
+        //...
+        await po.navegarA(page, navSubRoute)
 
-    //...
-    await po.tomarCaptura(page, scenarioTag)
+        //...
+        await po.tomarCaptura(page, scenarioTag)
 
-    //Verifica que el post se elimino correctamente
-    await po.verificarPostEliminado(page, postTitle)
+        //Verifica que el post se elimino correctamente
+        await po.verificarPostEliminado(page, postTitle)
 
-    //cierra el navegador y termina la prueba
-    await po.cerrarNavegador(page)
+        //... cierra el navegador y termina la prueba
+        await po.cerrarNavegador(page)
+
+        console.log('Finaliza escenario: ' + scenarioTag)
+    } catch {
+        //... cierra el navegador y termina la prueba
+        console.log('No se realizaron todos los steps')
+        console.log('---------------------------------------------------------------------------------------')
+        console.log([url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, postTitle, textPost])
+        console.log('---------------------------------------------------------------------------------------')
+        await po.cerrarNavegador(page)
+    }
 
 }

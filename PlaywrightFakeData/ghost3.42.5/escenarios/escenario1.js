@@ -50,10 +50,14 @@ exports.escenario1 = async(url, browser, scenarioTag, wrongEmail, wrongPass, cor
 
         //... cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
+
+        console.log('Finaliza escenario: ' + scenarioTag)
     } catch {
         //... cierra el navegador y termina la prueba
         console.log('No se realizaron todos los steps')
-        console.log(wrongEmail)
+        console.log('---------------------------------------------------------------------------------------')
+        console.log([url, browser, scenarioTag, wrongEmail, wrongPass, correctEmail, correctPass, loggedUserName, navSubRoute])
+        console.log('---------------------------------------------------------------------------------------')
         await po.cerrarNavegador(page)
     }
 
