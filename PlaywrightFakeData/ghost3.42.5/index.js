@@ -5,12 +5,11 @@ const e4 = require('./escenarios/escenario4')
 const e5 = require('./escenarios/escenario5')
 const e6 = require('./escenarios/escenario6')
 const e7 = require('./escenarios/escenario7');
-const e8 = require('./escenarios/escenario8')
-
-const e9 = require('./escenarios/escenario9')
+const e8 = require('./escenarios/escenario8');
+const e9 = require('./escenarios/escenario9');
 const e10 = require('./escenarios/escenario10')
 const e11 = require('./escenarios/escenario11');
-const e12 = require('./escenarios/escenario12')
+const e12 = require('./escenarios/escenario12');
 const e13 = require('./escenarios/escenario13');
 const e14 = require('./escenarios/escenario14');
 const e15 = require('./escenarios/escenario15');
@@ -103,28 +102,8 @@ const randomValue = (list) => {
         'staff',
         'ghost-author@example.com',
         faker.internet.password(),
-    ); 
-    // await e3.escenario3(
-    //     url,
-    //     'chromium',
-    //     'e3',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     "Nuevo Post"
-    // );
+    );
 
-    // await e2.escenario2(
-    //     url,
-    //     'chromium',
-    //     'e2',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'staff',
-    //     'ghost-author@example.com',
-    //     '1234567890$'
-    // );
 
     var index=0
     const e3_apriori_data = require("../aprioriData/e3_data.json");
@@ -139,7 +118,6 @@ const randomValue = (list) => {
             row["postTitle"]
         );
     }
-
     await e3.escenario3(
         url,
         'chromium',
@@ -172,6 +150,8 @@ const randomValue = (list) => {
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     //@param postTitle: titulo del post
     //@param textPost: texto del post
+
+    const e4AprioriData = require('../aprioriData/e4AprioriData.json');
     for (let i = 0; i < e4AprioriData.length; i++) {
         await e4.escenario4(
             url,
@@ -258,29 +238,6 @@ const randomValue = (list) => {
     );
 
 
-    // // Escenario 8 que recibe por parametro:
-    // // @param url: constante global de url de pagina
-    // // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // // @param scenarioTag: tag del escenario
-    // // @param correctEmail: un correo valido y existente para el login
-    // // @param correctPass: una contraseña valida y correcta para el login
-    // // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // // @param navSubRoute: ruta a la que se quiere navegar en la prueba
-    // // @param pageTitle: titulo del page
-    // // @param pageDescription: texto del page
-    // await e8.escenario8(
-    //     url,
-    //     'chromium',
-    //     'e8',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Página para crear',
-    //     'Descripción de página para crear'
-    // );
-
-
     var index = 0
     const e7_apriori_data = require("../aprioriData/e7_data.json");
     for (let row of e7_apriori_data) {
@@ -317,6 +274,7 @@ const randomValue = (list) => {
     );
     
 
+
     // Escenario 8 que recibe por parametro:
     // @param url: constante global de url de pagina
     // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -327,6 +285,8 @@ const randomValue = (list) => {
     // @param navSubRoute: ruta a la que se quiere navegar en la prueba
     // @param pageTitle: titulo del page
     // @param pageDescription: texto del page
+
+    const e8AprioriData = require('../aprioriData/e8AprioriData.json');
     for (let i = 0; i < e8AprioriData.length; i++) {
         await e8.escenario8(
             url,
@@ -352,6 +312,7 @@ const randomValue = (list) => {
         faker.lorem.paragraph()
     );
 
+
     // //Escenario 9 que recibe por parametro:
     // //@param url: constante global de url de pagina
     // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -374,16 +335,7 @@ const randomValue = (list) => {
     //     'texto de prueba de la pagina'
     // );
 
-    // //Escenario 10 que recibe por parametro:
-    // //@param url: constante global de url de pagina
-    // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // //@param scenarioTag: tag del escenario
-    // //@param correctEmail: un correo valido y existente para el login
-    // //@param correctPass: una contraseña valida y correcta para el login
-    // //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
-    // //@param postTitle: titulo de la pagina
-    // //@param textPost: texto de la pagina
+
     const e10_apriori_Data = require('../aprioriData/e10_data.json');
     for (let i = 0; i < e10_apriori_Data.length; i++) {
         let a = i+1;
@@ -410,18 +362,6 @@ const randomValue = (list) => {
         faker.lorem.words(10),
         faker.lorem.paragraph(20)
     );
-    // await e11.escenario11(
-    //     url,
-    //     'chromium',
-    //     'e11',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     'Post Nuevo',
-    //     administratorName,
-    //     'Ghost'
-    // );
-
 
 
     var index = 0
@@ -439,7 +379,6 @@ const randomValue = (list) => {
             row['newOwner']
         );
     }
-
     await e11.escenario11(
         url,
         'chromium',
@@ -474,6 +413,8 @@ const randomValue = (list) => {
     // @param navSubRoute: ruta a la que se quiere navegar en la prueba
     // @param pageTitle: titulo del page
     // @param pageDescription: texto del page
+
+    const e12AprioriData = require('../aprioriData/e12AprioriData.json');
     for (let i = 0; i < e12AprioriData.length; i++) {
         await e12.escenario12(
             url,
@@ -498,6 +439,7 @@ const randomValue = (list) => {
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         faker.lorem.paragraph()
     );
+
 
     // //Escenario 13 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -553,28 +495,6 @@ const randomValue = (list) => {
     //     'Post Con Imagen'
     // )
 
-    // // Scene 16's params:
-    // // @param url: global url
-    // // @param browser: chromium firefox or webkit
-    // // @param scenarioTag: scene's tag
-    // // @param email: email of the admin
-    // // @param password: password of the admin
-    // // @param loggedUserName: full_name of the admin
-    // // @param postName: name of the post
-    // // @param tagName: name of the tag
-    // // @param tagStatus: public or private
-    // await e16.escenario16(
-    //     url,
-    //     'chromium',
-    //     'e16',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'Post para etiquetar',
-    //     'TagPrivado',
-    //     'private'
-    // );
-
 
     var index = 0
     const e15_apriori_data = require("../aprioriData/e15_data.json");
@@ -590,7 +510,6 @@ const randomValue = (list) => {
             row['imgSrc']
         )
     }
-
     await e15.escenario15(
         url,
         'chromium',
@@ -624,6 +543,8 @@ const randomValue = (list) => {
     // @param postName: name of the post
     // @param tagName: name of the tag
     // @param tagStatus: public or private
+
+    const e16AprioriData = require('../aprioriData/e16AprioriData.json');
     for (let i = 0; i < e16AprioriData.length; i++) {
         await e16.escenario16(
             url,
@@ -649,6 +570,7 @@ const randomValue = (list) => {
         'private'
     );
 
+
     // //Escenario 17 que recibe por parametro:
     // //@param url: constante global de url de pagina
     // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -673,17 +595,7 @@ const randomValue = (list) => {
     //     'dadsfasdffffffffffffffffffffffffsdfsdfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffferqewrqerqwreSADASdASDSDSFDASDFADSFADSFADSFABCDQa'
     // );
 
-    // //Escenario 18 que recibe por parametro:
-    // //@param url: constante global de url de pagina
-    // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // //@param scenarioTag: tag del escenario
-    // //@param correctEmail: un correo valido y existente para el login
-    // //@param correctPass: una contraseña valida y correcta para el login
-    // //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // //@param postTitle: titulo del post
-    // //@param textPost: texto del post
-    // //@param tagName: nombre del tag a crear
-    // //@param tagStatus: tipo de tag a crear
+
     const e18_apriori_Data = require('../aprioriData/e18_data.json');
     for (let i = 0; i < e18_apriori_Data.length; i++) {
         let a = i+1;
@@ -759,6 +671,8 @@ const randomValue = (list) => {
     // @param loggedUserName: full_name of the admin
     // @param tagName: name of the tag
     // @param tagStatus: public or private
+
+    const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     for (let i = 0; i < e20AprioriData.length; i++) {
         await e20.escenario20(
             url,
