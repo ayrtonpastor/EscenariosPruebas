@@ -69,7 +69,7 @@ exports.escenario2 = async (url, browser, scenarioTag, correctEmail, correctPass
     } catch {
         //cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
-        console.log('Escenario '+ scenarioTag +': No se realizaron todos los steps')
+        console.log('Escenario '+ scenarioTag +': No se realizaron todos los steps por estado inesperado')
         
     }
 }

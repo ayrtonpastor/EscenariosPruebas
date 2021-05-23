@@ -1,5 +1,5 @@
 const po = require('../page-objects')
-exports.escenario19 = async (url, browser, scenarioTag, email, pass, navSubRoute, postTitle) => {
+exports.escenario19 = async (url, browser, scenarioTag, email, pass, navSubRoute, postTitle, mDate) => {
 
     console.log('Inicia escenario: ' + scenarioTag)
 
@@ -34,7 +34,7 @@ exports.escenario19 = async (url, browser, scenarioTag, email, pass, navSubRoute
         //...
         await po.tomarCaptura(page, scenarioTag)
 
-        await po.schedulePublishPost(page)
+        await po.schedulePublishPost(page, mDate)
 
         //...
         await po.tomarCaptura(page, scenarioTag)
