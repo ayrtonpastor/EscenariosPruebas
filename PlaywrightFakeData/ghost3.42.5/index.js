@@ -24,8 +24,13 @@ const url = 'http://localhost:2368/ghost/';
 const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
+const faker = require('faker');
 
-
+const e4AprioriData = require('../aprioriData/e4AprioriData.json');
+const e8AprioriData = require('../aprioriData/e8AprioriData.json');
+const e12AprioriData = require('../aprioriData/e12AprioriData.json');
+const e16AprioriData = require('../aprioriData/e16AprioriData.json');
+const e20AprioriData = require('../aprioriData/e20AprioriData.json');
 
 
 //Función flecha asíncrona
@@ -45,20 +50,20 @@ const administratorPassword = 'administrador123';
     //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
 
-    for (let i = 0; i < e1_apriori_Data.length; i++) {
-        await e1.escenario1(
-            url,
-            'chromium',
-            'e1',
-            e1_apriori_Data[i]['correo'],
-            e1_apriori_Data[i]['contrasena'],
-            administratorEmail,
-            administratorPassword,
-            administratorName,
-            'staff'
-        );
-
-    }
+    // for (let i = 0; i < e1_apriori_Data.length; i++) {
+    //     await e1.escenario1(
+    //         url,
+    //         'chromium',
+    //         'e1',
+    //         e1_apriori_Data[i]['correo'],
+    //         e1_apriori_Data[i]['contrasena'],
+    //         administratorEmail,
+    //         administratorPassword,
+    //         administratorName,
+    //         'staff'
+    //     );
+    //
+    // }
 
 
 
@@ -96,27 +101,42 @@ const administratorPassword = 'administrador123';
     // );
 
 
-    // //Escenario 4 que recibe por parametro:
-    // //@param url: constante global de url de pagina
-    // //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // //@param scenarioTag: tag del escenario
-    // //@param correctEmail: un correo valido y existente para el login
-    // //@param correctPass: una contraseña valida y correcta para el login
-    // //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
-    // //@param postTitle: titulo del post
-    // //@param textPost: texto del post
-    // await e4.escenario4(
-    //     url,
-    //     'chromium',
-    //     'e4',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'posts',
-    //     'Published Post',
-    //     'Descripción de published post.'
-    // );
+
+    //Escenario 4 que recibe por parametro:
+    //@param url: constante global de url de pagina
+    //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    //@param scenarioTag: tag del escenario
+    //@param correctEmail: un correo valido y existente para el login
+    //@param correctPass: una contraseña valida y correcta para el login
+    //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    //@param navSubRoute: ruta a la que se quiere navegar en la prueba
+    //@param postTitle: titulo del post
+    //@param textPost: texto del post
+    for (let i = 0; i < e4AprioriData.length; i++) {
+        await e4.escenario4(
+            url,
+            'chromium',
+            `e4-Apriori-${(i+1).toString()}`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'posts',
+            e4AprioriData[i]['post_name'],
+            e4AprioriData[i]['post_description']
+        );
+    }
+    await e4.escenario4(
+        url,
+        'chromium',
+        `e4-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.lorem.paragraph()
+    );
+
 
     // //Escenario 5 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -184,27 +204,40 @@ const administratorPassword = 'administrador123';
     //     "Nueva Pagina"
     // );
 
-    // // Escenario 8 que recibe por parametro:
-    // // @param url: constante global de url de pagina
-    // // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // // @param scenarioTag: tag del escenario
-    // // @param correctEmail: un correo valido y existente para el login
-    // // @param correctPass: una contraseña valida y correcta para el login
-    // // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // // @param navSubRoute: ruta a la que se quiere navegar en la prueba
-    // // @param pageTitle: titulo del page
-    // // @param pageDescription: texto del page
-    // await e8.escenario8(
-    //     url,
-    //     'chromium',
-    //     'e8',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Página para crear',
-    //     'Descripción de página para crear'
-    // );
+    // Escenario 8 que recibe por parametro:
+    // @param url: constante global de url de pagina
+    // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    // @param scenarioTag: tag del escenario
+    // @param correctEmail: un correo valido y existente para el login
+    // @param correctPass: una contraseña valida y correcta para el login
+    // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    // @param navSubRoute: ruta a la que se quiere navegar en la prueba
+    // @param pageTitle: titulo del page
+    // @param pageDescription: texto del page
+    for (let i = 0; i < e8AprioriData.length; i++) {
+        await e8.escenario8(
+            url,
+            'chromium',
+            `e8-Aleatorio-1`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            e8AprioriData[i]['page_name'],
+            e8AprioriData[i]['page_description']
+        );
+    }
+    await e8.escenario8(
+        url,
+        'chromium',
+        `e8-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.lorem.paragraph()
+    );
 
     // //Escenario 9 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -263,27 +296,40 @@ const administratorPassword = 'administrador123';
     //     'Ghost'
     // );
 
-    // // Escenario 12 que recibe por parametro:
-    // // @param url: constante global de url de pagina
-    // // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
-    // // @param scenarioTag: tag del escenario
-    // // @param correctEmail: un correo valido y existente para el login
-    // // @param correctPass: una contraseña valida y correcta para el login
-    // // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
-    // // @param navSubRoute: ruta a la que se quiere navegar en la prueba
-    // // @param pageTitle: titulo del page
-    // // @param pageDescription: texto del page
-    // await e12.escenario12(
-    //     url,
-    //     'chromium',
-    //     'e12',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Página para cabecera',
-    //     'Descripción de página para cabecera'
-    // );
+    // Escenario 12 que recibe por parametro:
+    // @param url: constante global de url de pagina
+    // @param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
+    // @param scenarioTag: tag del escenario
+    // @param correctEmail: un correo valido y existente para el login
+    // @param correctPass: una contraseña valida y correcta para el login
+    // @param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
+    // @param navSubRoute: ruta a la que se quiere navegar en la prueba
+    // @param pageTitle: titulo del page
+    // @param pageDescription: texto del page
+    for (let i = 0; i < e12AprioriData.length; i++) {
+        await e12.escenario12(
+            url,
+            'chromium',
+            `e12-Apriori-${(i+1).toString()}`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            e12AprioriData[i]['page_name'],
+            e12AprioriData[i]['page_description']
+        );
+    }
+    await e12.escenario12(
+        url,
+        'chromium',
+        `e12-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.lorem.paragraph()
+    );
 
     // //Escenario 13 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -336,27 +382,40 @@ const administratorPassword = 'administrador123';
     //     'Post Con Imagen'
     // )
 
-    // // Scene 16's params:
-    // // @param url: global url
-    // // @param browser: chromium firefox or webkit
-    // // @param scenarioTag: scene's tag
-    // // @param email: email of the admin
-    // // @param password: password of the admin
-    // // @param loggedUserName: full_name of the admin
-    // // @param postName: name of the post
-    // // @param tagName: name of the tag
-    // // @param tagStatus: public or private
-    // await e16.escenario16(
-    //     url,
-    //     'chromium',
-    //     'e16',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'Post para etiquetar',
-    //     'TagPrivado',
-    //     'private'
-    // );
+    // Scene 16's params:
+    // @param url: global url
+    // @param browser: chromium firefox or webkit
+    // @param scenarioTag: scene's tag
+    // @param email: email of the admin
+    // @param password: password of the admin
+    // @param loggedUserName: full_name of the admin
+    // @param postName: name of the post
+    // @param tagName: name of the tag
+    // @param tagStatus: public or private
+    for (let i = 0; i < e16AprioriData.length; i++) {
+        await e16.escenario16(
+            url,
+            'chromium',
+            `e16-Apriori-${(i+1).toString()}`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            e16AprioriData[i]['post_name'],
+            e16AprioriData[i]['tag_name'],
+            'private'
+        );
+    }
+    await e16.escenario16(
+        url,
+        'chromium',
+        `e16-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        'private'
+    );
 
     // //Escenario 17 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -416,23 +475,35 @@ const administratorPassword = 'administrador123';
     //     'Post agendado'
     // );
 
-    // // Scene 20's params:
-    // // @param url: global url
-    // // @param browser: chromium firefox or webkit
-    // // @param scenarioTag: scene's tag
-    // // @param email: email of the admin
-    // // @param password: password of the admin
-    // // @param loggedUserName: full_name of the admin
-    // // @param tagName: name of the tag
-    // // @param tagStatus: public or private
-    // await e20.escenario20(
-    //     url,
-    //     'chromium',
-    //     'e20',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'Tag para eliminar',
-    //     'public'
-    // );
+    // Scene 20's params:
+    // @param url: global url
+    // @param browser: chromium firefox or webkit
+    // @param scenarioTag: scene's tag
+    // @param email: email of the admin
+    // @param password: password of the admin
+    // @param loggedUserName: full_name of the admin
+    // @param tagName: name of the tag
+    // @param tagStatus: public or private
+    for (let i = 0; i < e20AprioriData.length; i++) {
+        await e20.escenario20(
+            url,
+            'chromium',
+            `e20-Apriori-${(i+1).toString()}`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            e20AprioriData[i]['tag_name'],
+            'private'
+        );
+    }
+    await e20.escenario20(
+        url,
+        'chromium',
+        `e20-Aleatorio-1`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
+        'private'
+    );
 })(); //Llamado propio de la función
