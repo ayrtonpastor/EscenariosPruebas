@@ -1,12 +1,12 @@
 const po = require('../page-objects')
-exports.escenario14 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, newRol) => {
+exports.escenario14 = async(url, browser, scenarioTag, correctEmail, correctPass, loggedUserName, navSubRoute, newURL) => {
 
 
     //chromium, firefox o webkit
-    console.log('Escenario 14: Cambiar rol usuario Ghost')
+    console.log('Escenario '+ scenarioTag +': Cambiar website usuario Ghost')
     //construye y dispara el navegador por parametro "chromium, firefox o webkit"
     let page = await po.construirBrowser(browser)
-    try {
+     try {
         //navega a la url que llega por parametro
         await po.navegarUrl(page, url)
 
@@ -37,8 +37,8 @@ exports.escenario14 = async(url, browser, scenarioTag, correctEmail, correctPass
         //...
         await po.tomarCaptura(page, scenarioTag)
 
-        //Realiza el cambio de rol al usuario Ghost
-        await po.realizarCambioRol(page,newRol)
+        //Realiza el cambio de website al usuario Ghost
+        await po.realizarCambioWebSite(page,newURL)
 
         //...
         await po.tomarCaptura(page, scenarioTag)
@@ -46,8 +46,14 @@ exports.escenario14 = async(url, browser, scenarioTag, correctEmail, correctPass
         // navega a una subruta dada por parametro    
         await po.navegarA(page, navSubRoute)
 
+        // navega a una subruta dada por parametro
+        await po.navegarA(page, navSubRoute + '/ghost')
+
+        //...
+        await po.tomarCaptura(page, scenarioTag)
+
         //Verfica que el rol cambio a Editor
-        await po.verificarRolCorrecto(page, newRol, 'Ghost')
+        await po.verificarWebCorrecto(page, newURL)
 
         //...
         await po.tomarCaptura(page, scenarioTag) 
@@ -57,11 +63,12 @@ exports.escenario14 = async(url, browser, scenarioTag, correctEmail, correctPass
 
         //Cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
-        console.log('Escenario 14: Finalizado')
+        console.log('Escenario '+ scenarioTag +': Finalizado')
     } catch {
         //cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
-        console.log('No se realizaron todos los steps')
+        console.log('Escenario '+ scenarioTag +': No se realizaron todos los steps por estado inesperado')
+        
         
     }
 }

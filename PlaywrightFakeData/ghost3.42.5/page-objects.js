@@ -432,3 +432,21 @@ exports.eliminarUltimoTag = async(page, tagStatus, tagName) => {
     await page.click(`xpath=//html/body/div[2]/div/main/section/button`);
     await page.click(`xpath=(//*[@class='modal-footer']//button)[2]`);
 }
+exports.realizarCambioWebSite = async(page, newURL) => {
+    page = page[0]
+    const webNewInput = 'input[id=user-website]'
+    await page.click(`css=${webNewInput}`)
+    await page.fill(`css=${webNewInput}`, newURL)
+    await this.esperar(1000)
+    const saveButt = await page.waitForSelector('button.gh-btn-blue')
+    await saveButt.click()
+    await this.esperar(1000)
+}
+exports.verificarWebCorrecto = async(page, website) => {
+    page = page[0]
+    await this.esperar(1000)
+    const webNewInput = 'input[id=user-website]'
+    await this.esperar(1000)
+    await page.click(`css=${webNewInput}`)
+    //expect(await page.innerText(`css=${webNewInput}`)).toEqual(`${website}`)
+}
