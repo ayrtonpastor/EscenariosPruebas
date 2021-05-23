@@ -25,8 +25,8 @@ exports.construirBrowser = async(browserType) => {
     numeroCaptura = 0;
     const browser = await playwright[browserType].launch({ headless: false });
     const context = await browser.newContext();
-    await context.setDefaultTimeout(2000)
-    await context.setDefaultNavigationTimeout(2000)
+    await context.setDefaultTimeout(3500)
+    await context.setDefaultNavigationTimeout(3500)
 
     return [await context.newPage(), browser];
 }

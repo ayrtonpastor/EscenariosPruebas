@@ -24,8 +24,7 @@ const url = 'http://localhost:2368/ghost/';
 const administratorName = 'Ayrton Pastor C.';
 const administratorEmail = 'administrador123@example.com';
 const administratorPassword = 'administrador123';
-
-
+const faker = require('faker');
 
 
 //Función flecha asíncrona
@@ -57,7 +56,6 @@ const administratorPassword = 'administrador123';
             administratorName,
             'staff'
         );
-
     }
 
 
@@ -73,18 +71,32 @@ const administratorPassword = 'administrador123';
     // //@param postTitle: titulo del post
     // //@param textPost: texto del post
 
-    // await e2.escenario2(
-    //     url,
-    //     'chromium',
-    //     'e2',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'staff',
-    //     'ghost-author@example.com',
-    //     '1234567890$'
-    // );
-
+    const e2_apriori_Data = require('../aprioriData/e2_data.json');
+    for (let i = 0; i < e2_apriori_Data.length; i++) {
+        let a = i+1;
+        await e2.escenario2(
+            url,
+            'chromium',
+            'e2_' + a,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'staff',
+            e2_apriori_Data[i]['correo'],
+            e2_apriori_Data[i]['contrasena']           
+        );
+    }
+    await e2.escenario2(
+        url,
+        'chromium',
+        'e2_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff',
+        'ghost-author@example.com',
+        faker.internet.password(),
+    ); 
     // await e3.escenario3(
     //     url,
     //     'chromium',
@@ -161,18 +173,32 @@ const administratorPassword = 'administrador123';
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param postTitle: titulo del post
     // //@param textPost: texto del post
-    // await e6.escenario6(
-    //     url,
-    //     'chromium',
-    //     'e6',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'posts',
-    //     'Post Escenario 6',
-    //     'texto de prueba del post'
-    // );
-
+    const e6_apriori_Data = require('../aprioriData/e6_data.json');
+    for (let i = 0; i < e6_apriori_Data.length; i++) {
+        let a = i+1;
+        await e6.escenario6(
+            url,
+            'chromium',
+            'e6_'+ a,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'posts',
+            e6_apriori_Data[i]['tituloPost'],
+            e6_apriori_Data[i]['textoPost']
+        );
+    }
+    await e6.escenario6(
+        url,
+        'chromium',
+        'e6_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        faker.lorem.sentence(),
+        faker.lorem.paragraph()
+    );
     // await e7.escenario7(
     //     url,
     //     'chromium',
@@ -238,19 +264,32 @@ const administratorPassword = 'administrador123';
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param postTitle: titulo de la pagina
     // //@param textPost: texto de la pagina
-    // await e10.escenario10(
-    //     url,
-    //     'chromium',
-    //     'e10',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     'Pagina Escenario 10',
-    //     'texto de prueba de la pagina'
-    // );
-
-
+    const e10_apriori_Data = require('../aprioriData/e10_data.json');
+    for (let i = 0; i < e10_apriori_Data.length; i++) {
+        let a = i+1;
+        await e10.escenario10(
+            url,
+            'chromium',
+            'e10_'+ a,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            e10_apriori_Data[i]['tituloPagina'],
+            e10_apriori_Data[i]['textoPagina']
+        );
+    }
+    await e10.escenario10(
+        url,
+        'chromium',
+        'e10_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        faker.lorem.words(10),
+        faker.lorem.paragraph(20)
+    );
     // await e11.escenario11(
     //     url,
     //     'chromium',
@@ -315,17 +354,20 @@ const administratorPassword = 'administrador123';
     // //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param newRol: nombre del nuevo rol a cambiar
-
-    // await e14.escenario14(
-    //     url,
-    //     'chromium',
-    //     'e14',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'staff',
-    //     'EDITOR'
-    // );
+    const e14_apriori_Data = require('../aprioriData/e14_data.json');
+    // for (let i = 0; i < e14_apriori_Data.length; i++) {
+    //     let a = i+1;
+    //     await e14.escenario14(
+    //         url,
+    //         'chromium',
+    //         'e14_' + a,
+    //         administratorEmail,
+    //         administratorPassword,
+    //         administratorName,
+    //         'staff',
+    //         'EDITOR'
+    //     );
+    // }
     // await e15.escenario15(
     //     url,
     //     'chromium',
@@ -393,19 +435,34 @@ const administratorPassword = 'administrador123';
     // //@param textPost: texto del post
     // //@param tagName: nombre del tag a crear
     // //@param tagStatus: tipo de tag a crear
-    // await e18.escenario18(
-    //     url,
-    //     'chromium',
-    //     'e18',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'Post Escenario 18',
-    //     'texto de prueba del post',
-    //     'TagPublica',
-    //     'public'
-    // );
-
+    const e18_apriori_Data = require('../aprioriData/e18_data.json');
+    for (let i = 0; i < e18_apriori_Data.length; i++) {
+        let a = i+1;
+        await e18.escenario18(
+            url,
+            'chromium',
+            'e18_' + a,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            e18_apriori_Data[i]['tituloPost'],
+            e18_apriori_Data[i]['textoPost'],
+            e18_apriori_Data[i]['tituloTag'],
+            'public'
+        );
+    }
+    await e18.escenario18(
+        url,
+        'chromium',
+        'e18_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        faker.lorem.text(),
+        faker.lorem.paragraph(),
+        faker.lorem.sentence(),
+        'public'
+    );
     // await e19.escenario19(
     //     url,
     //     'chromium',
