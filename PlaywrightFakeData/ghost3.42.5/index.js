@@ -319,7 +319,7 @@ const randomValue = (list) => {
         await e8.escenario8(
             url,
             'chromium',
-            `e8-Aleatorio-1`,
+            `e8-Apriori-${(i+1).toString()}`,
             administratorEmail,
             administratorPassword,
             administratorName,
