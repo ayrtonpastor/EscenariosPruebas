@@ -27,6 +27,7 @@ const faker = require('faker');
 
 const p_mockaroo_data = require('../pseudoRandom/Mockaroo.json')
 const aMockarooData = require('../pseudoRandom/Mockaroo1.json')
+const jcMockarooData = require('../pseudoRandom/Mockaroo2.json')
 
 const randomValue = (list) => {
     return list[Math.floor(Math.random() * list.length)];
@@ -90,7 +91,7 @@ const randomValue = (list) => {
     await e2.escenario2(
         url,
         'chromium',
-        'e2_6',
+        'e2_5',
         administratorEmail,
         administratorPassword,
         administratorName,
@@ -98,7 +99,17 @@ const randomValue = (list) => {
         'ghost-author@example.com',
         faker.internet.password(),
     );
-
+    await e2.escenario2(
+        url,
+        'chromium',
+        'e2_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff',
+        'ghost-author@example.com',
+        randomValue(jcMockarooData)['password']
+    );
 
     var index=0
     const e3_apriori_data = require("../aprioriData/e3_data.json");
@@ -234,7 +245,7 @@ const randomValue = (list) => {
     await e6.escenario6(
         url,
         'chromium',
-        'e6_6',
+        'e6_5',
         administratorEmail,
         administratorPassword,
         administratorName,
@@ -242,7 +253,18 @@ const randomValue = (list) => {
         faker.lorem.sentence(),
         faker.lorem.paragraph()
     );
-
+    await e6.escenario6(
+        url,
+        'chromium',
+        'e6_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'posts',
+        randomValue(jcMockarooData)['tituloPost'],
+        randomValue(jcMockarooData)['textoPost']
+    );
+    
 
     var index = 0
     const e7_apriori_data = require("../aprioriData/e7_data.json");
@@ -371,7 +393,7 @@ const randomValue = (list) => {
     await e10.escenario10(
         url,
         'chromium',
-        'e10_6',
+        'e10_5',
         administratorEmail,
         administratorPassword,
         administratorName,
@@ -379,7 +401,18 @@ const randomValue = (list) => {
         faker.lorem.words(10),
         faker.lorem.paragraph(20)
     );
-
+    await e10.escenario10(
+        url,
+        'chromium',
+        'e10_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        randomValue(jcMockarooData)['tituloPagina'],
+        randomValue(jcMockarooData)['textoPagina']
+    );
+    
 
     var index = 0
     const e11_apriori_data = require("../aprioriData/e11_data.json");
@@ -516,15 +549,24 @@ const randomValue = (list) => {
     await e14.escenario14(
         url,
         'chromium',
-        'e14_6',
+        'e14_5',
         administratorEmail,
         administratorPassword,
         administratorName,
         'staff',
         faker.internet.url()
     );
-
-
+    await e14.escenario14(
+        url,
+        'chromium',
+        'e14_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff',
+        randomValue(jcMockarooData)['url'],
+    );
+    
     var index = 0
     const e15_apriori_data = require("../aprioriData/e15_data.json");
     for (let row of e15_apriori_data) {
@@ -655,7 +697,7 @@ const randomValue = (list) => {
     await e18.escenario18(
         url,
         'chromium',
-        'e18_6',
+        'e18_5',
         administratorEmail,
         administratorPassword,
         administratorName,
@@ -664,7 +706,19 @@ const randomValue = (list) => {
         faker.lorem.sentence(),
         'public'
     );
-
+    await e18.escenario18(
+        url,
+        'chromium',
+        'e18_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        randomValue(jcMockarooData)['tituloPost'],
+        randomValue(jcMockarooData)['textoPost'],
+        randomValue(jcMockarooData)['tituloTag'],
+        'public'
+    );
+    
     var index=0
     const e19_apriori_data = require("../aprioriData/e19_data.json");
     for (let row of e19_apriori_data) {
