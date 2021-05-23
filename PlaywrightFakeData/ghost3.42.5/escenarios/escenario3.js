@@ -1,12 +1,12 @@
 const po = require('../page-objects')
-exports.escenario3 = async(url, browser, scenarioTag, email, pass, navSubRoute,
+exports.escenario3 = async (url, browser, scenarioTag, email, pass, navSubRoute,
     postTitle) => {
 
-    try {
-        console.log('Inicia escenario: ' + scenarioTag)
+    console.log('Inicia escenario: ' + scenarioTag)
 
-        //construye y dispara el navegador por parametro "chromium, firefox o webkit"
-        let page = await po.construirBrowser(browser)
+    //construye y dispara el navegador por parametro "chromium, firefox o webkit"
+    let page = await po.construirBrowser(browser)
+    try {
 
         //navega a la url que llega por parametro
         await po.navegarUrl(page, url)
@@ -53,10 +53,11 @@ exports.escenario3 = async(url, browser, scenarioTag, email, pass, navSubRoute,
 
         //...
         await po.tomarCaptura(page, scenarioTag)
-    } catch {
+
         //... cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
-    } finally {
+    } catch {
+        console.log("Datos invalidos, comportamiento inesperado para el escenario")
         //... cierra el navegador y termina la prueba
         await po.cerrarNavegador(page)
     }

@@ -35,10 +35,6 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
 
 //Función flecha asíncrona
 (async() => {
-    /*
-     */
-
-
     //Escenario 1 que recibe por parametro:
     //@param url: constante global de url de pagina
     //@param browser: el tipo de browser en el cual se hara la prueba "chromium, firefox o webkit"
@@ -50,20 +46,20 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     //@param loggedUserName: nombre del usuario registrado relacionado al correo valido y existente
     //@param navSubRoute: ruta a la que se quiere navegar en la prueba
 
-    // for (let i = 0; i < e1_apriori_Data.length; i++) {
-    //     await e1.escenario1(
-    //         url,
-    //         'chromium',
-    //         'e1',
-    //         e1_apriori_Data[i]['correo'],
-    //         e1_apriori_Data[i]['contrasena'],
-    //         administratorEmail,
-    //         administratorPassword,
-    //         administratorName,
-    //         'staff'
-    //     );
-    //
-    // }
+    for (let i = 0; i < e1_apriori_Data.length; i++) {
+        await e1.escenario1(
+            url,
+            'chromium',
+            'e1',
+            e1_apriori_Data[i]['correo'],
+            e1_apriori_Data[i]['contrasena'],
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'staff'
+        );
+
+    }
 
 
 
@@ -90,17 +86,29 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     //     '1234567890$'
     // );
 
-    // await e3.escenario3(
-    //     url,
-    //     'chromium',
-    //     'e3',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     "Nuevo Post"
-    // );
+    var index=0
+    const e3_apriori_data = require("../aprioriData/e3_data.json");
+    for (let row of e3_apriori_data) {
+        await e3.escenario3(
+            url,
+            'chromium',
+            `e3_${index++}`,
+            administratorEmail,
+            administratorPassword,
+            'posts',
+            row["postTitle"]
+        );
+    }
 
-
+    await e3.escenario3(
+        url,
+        'chromium',
+        `e3_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        faker.lorem.sentence()
+    );
 
     //Escenario 4 que recibe por parametro:
     //@param url: constante global de url de pagina
@@ -136,7 +144,6 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
         faker.phone.phoneNumber()+faker.phone.phoneNumber()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.firstName()+faker.name.lastName()+faker.internet.email(),
         faker.lorem.paragraph()
     );
-
 
     // //Escenario 5 que recibe por parametro:
     // //@param url: constante global de url de pagina
@@ -193,16 +200,30 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     //     'texto de prueba del post'
     // );
 
-    // await e7.escenario7(
-    //     url,
-    //     'chromium',
-    //     'e7',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     administratorName,
-    //     'pages',
-    //     "Nueva Pagina"
-    // );
+    var index = 0
+    const e7_apriori_data = require("../aprioriData/e7_data.json");
+    for (let row of e7_apriori_data) {
+        await e7.escenario7(
+            url,
+            'chromium',
+            `e7_${index++}`,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'pages',
+            row['pageTitle']
+        );
+    }
+    await e7.escenario7(
+        url,
+        'chromium',
+        `e7_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'pages',
+        faker.lorem.sentence()
+    );
 
     // Escenario 8 que recibe por parametro:
     // @param url: constante global de url de pagina
@@ -284,17 +305,33 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     // );
 
 
-    // await e11.escenario11(
-    //     url,
-    //     'chromium',
-    //     'e11',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     'Post Nuevo',
-    //     administratorName,
-    //     'Ghost'
-    // );
+    var index = 0
+    const e11_apriori_data = require("../aprioriData/e11_data.json");
+    for (let row of e11_apriori_data) {
+        await e11.escenario11(
+            url,
+            'chromium',
+            `e11_${index++}`,
+            administratorEmail,
+            administratorPassword,
+            'posts',
+            row['pageTitle'],
+            administratorName,
+            row['newOwner']
+        );
+    }
+
+    await e11.escenario11(
+        url,
+        'chromium',
+        `e11_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        faker.lorem.sentence(),
+        administratorName,
+        faker.name.firstName()
+    );
 
     // Escenario 12 que recibe por parametro:
     // @param url: constante global de url de pagina
@@ -372,15 +409,32 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     //     'staff',
     //     'EDITOR'
     // );
-    // await e15.escenario15(
-    //     url,
-    //     'chromium',
-    //     'e15',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     'Post Con Imagen'
-    // )
+
+    var index = 0
+    const e15_apriori_data = require("../aprioriData/e15_data.json");
+    for (let row of e15_apriori_data) {
+        await e15.escenario15(
+            url,
+            'chromium',
+            `e15_${index++}`,
+            administratorEmail,
+            administratorPassword,
+            'posts',
+            'Post Con Imagen',
+            row['imgSrc']
+        )
+    }
+
+    await e15.escenario15(
+        url,
+        'chromium',
+        `e15_${index++}`,
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        'Post Con Imagen',
+        faker.image.imageUrl()
+    )
 
     // Scene 16's params:
     // @param url: global url
@@ -465,15 +519,16 @@ const e20AprioriData = require('../aprioriData/e20AprioriData.json');
     //     'public'
     // );
 
-    // await e19.escenario19(
-    //     url,
-    //     'chromium',
-    //     'e19',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     'Post agendado'
-    // );
+    //TODO NEW SCENARIOS
+    await e19.escenario19(
+        url,
+        'chromium',
+        'e19',
+        administratorEmail,
+        administratorPassword,
+        'posts',
+        'Post agendado'
+    );
 
     // Scene 20's params:
     // @param url: global url

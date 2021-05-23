@@ -25,8 +25,8 @@ exports.construirBrowser = async(browserType) => {
     numeroCaptura = 0;
     const browser = await playwright[browserType].launch({ headless: false });
     const context = await browser.newContext();
-    await context.setDefaultTimeout(2000)
-    await context.setDefaultNavigationTimeout(2000)
+    await context.setDefaultTimeout(3500)
+    await context.setDefaultNavigationTimeout(3500)
 
     return [await context.newPage(), browser];
 }
@@ -133,7 +133,8 @@ exports.changePostOwner = async(page, old_owner, new_owner) => {
     await this.esperar(1000)
     await page.click(`xpath=//div[label[text()='Authors']]//div[@role='button']`)
     await page.keyboard.press('Backspace')
-    await page.click(`xpath=//ul[@role='listbox']//li[@role='option' and text()='${new_owner}']`)
+    await page.keyboard.type(new_owner)
+    await page.keyboard.press('Enter')
     await this.esperar(1000)
 }
 
@@ -153,7 +154,7 @@ exports.schedulePublishPost = async(page) => {
     await page.click(`xpath=//button[contains(@class,'gh-publishmenu-button')]//span[text()='Schedule']`)
 }
 
-exports.enterImageContentToPost = async(page) => {
+exports.enterImageContentToPost = async(page, url) => {
     page = page[0]
     await page.click(`xpath=//*[@data-placeholder='Begin writing your post...']`)
     await this.esperar(1000)
@@ -161,7 +162,7 @@ exports.enterImageContentToPost = async(page) => {
     await this.esperar(1000)
     await page.click(`xpath=//div[@data-kg='cardmenu-card']//div[text()='HTML']`)
     await this.esperar(1000)
-    await page.keyboard.insertText("<img src='https://ichef.bbci.co.uk/news/640/cpsprodpb/15A5F/production/_115017688_c6122844-332e-4516-a812-e56991e9374a.jpg'/>");
+    await page.keyboard.insertText(`<img src='${url}'/>`);
 }
 
 exports.performActionOnElement = async(page, action, type_element) => {
