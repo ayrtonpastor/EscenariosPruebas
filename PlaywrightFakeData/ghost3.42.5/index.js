@@ -500,28 +500,29 @@ const randomValue = (list) => {
     // //@param navSubRoute: ruta a la que se quiere navegar en la prueba
     // //@param newRol: nombre del nuevo rol a cambiar
     const e14_apriori_Data = require('../aprioriData/e14_data.json');
-    // for (let i = 0; i < e14_apriori_Data.length; i++) {
-    //     let a = i+1;
-    //     await e14.escenario14(
-    //         url,
-    //         'chromium',
-    //         'e14_' + a,
-    //         administratorEmail,
-    //         administratorPassword,
-    //         administratorName,
-    //         'staff',
-    //         'EDITOR'
-    //     );
-    // }
-    // await e15.escenario15(
-    //     url,
-    //     'chromium',
-    //     'e15',
-    //     administratorEmail,
-    //     administratorPassword,
-    //     'posts',
-    //     'Post Con Imagen'
-    // )
+    for (let i = 0; i < e14_apriori_Data.length; i++) {
+        let a = i+1;
+        await e14.escenario14(
+            url,
+            'chromium',
+            'e14_' + a,
+            administratorEmail,
+            administratorPassword,
+            administratorName,
+            'staff',
+            e14_apriori_Data[i]['url']
+        );
+    }
+    await e14.escenario14(
+        url,
+        'chromium',
+        'e14_6',
+        administratorEmail,
+        administratorPassword,
+        administratorName,
+        'staff',
+        faker.internet.url()
+    );
 
 
     var index = 0
